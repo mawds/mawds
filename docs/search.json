@@ -4,7 +4,14 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Shiny\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntesting\n\n\ntests\n\n\n\n\n\n\n\n\n\n\n\nNov 23, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "Shiny\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/shinysender.html",
+    "href": "posts/shinysender.html",
+    "title": "Easily deploying Shiny apps",
+    "section": "",
+    "text": "Footnotes\n\n\nThey also offer other features, like making the app more scalable if it has many concurrent users.↩︎\nThis was the most secure way I could think of doing this..if there are better ways I’d be grateful to hear of them.↩︎"
   },
   {
     "objectID": "index.html",
@@ -33,19 +40,5 @@
     "title": "About me",
     "section": "Experience",
     "text": "Experience\nWengo Analytics | Head Data Scientist | April 2018 - present\nGeoScynce | Chief Analyst | Spet 2012 - April 2018\ntitle: “About me” about: links: - icon: twitter text: Twitter\n\nI am a software engineer/data scientist/statistician living in Bristol, UK.\nI’m currently working at the University of Manchester as Senior Research Software Engineer. You can see my career history on Linkedin"
-  },
-  {
-    "objectID": "posts/testpost.html",
-    "href": "posts/testpost.html",
-    "title": "Test post",
-    "section": "",
-    "text": "Methods\nWe did stuff\n\n\nResults\nWe got results"
-  },
-  {
-    "objectID": "posts/shinysender.html",
-    "href": "posts/shinysender.html",
-    "title": "Easily deploying Shiny apps",
-    "section": "",
-    "text": "Footnotes\n\n\nThey also offer other features, like making the app more scalable if it has many concurrent users.↩︎\nThis was the most secure way I could think of doing this..if there are better ways I’d be grateful to hear of them.↩︎"
   }
 ]
