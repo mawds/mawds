@@ -44,7 +44,7 @@
   {
     "objectID": "posts/shinysender.html",
     "href": "posts/shinysender.html",
-    "title": "Shinysender",
+    "title": "Easily deploying Shiny apps",
     "section": "",
     "text": "Footnotes\n\n\nThey also offer other features, like making the app more scalable if it has many concurrent users.↩︎\nThis was the most secure way I could think of doing this..if there are better ways I’d be grateful to hear of them.↩︎"
   }

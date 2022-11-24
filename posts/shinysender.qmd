@@ -1,5 +1,5 @@
 ---
-title: "Shinysender"
+title: "Easily deploying Shiny apps"
 date: 2022-11-24
 categories: 
   - Shiny
