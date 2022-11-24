@@ -1,0 +1,42 @@
+---
+title: "About me"
+about:
+  template: broadside 
+  image: profile.jpg
+  links:
+    - icon: mastodon 
+      text: mastodon
+      href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com/mawds
+---
+
+Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending  time unicycling and playing with her pet iguana.
+
+## Education
+
+University of California, San Diego | San Diego, CA
+PhD in Mathematics | Sept 2011 - June 2015
+
+Macalester College | St. Paul MA
+B.A in Economics | Sept 2007 - June 2011
+
+## Experience
+
+Wengo Analytics | Head Data Scientist | April 2018 - present
+
+GeoScynce | Chief Analyst | Spet 2012 - April 2018
+
+
+title: "About me"
+about: 
+  links:
+    - icon: twitter
+      text: Twitter
+    
+---
+
+I am a software engineer/data scientist/statistician living in Bristol, UK.
+
+I'm currently working at the University of Manchester as Senior Research Software Engineer.  You can see my career history on [Linkedin](https://www.linkedin.com/in/david-mawdsley-7477873/)

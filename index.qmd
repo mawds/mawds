@@ -1,0 +1,6 @@
+---
+title: "David Mawdsley"
+---
+
+Welcome to my homepage.  You can [read more about me](about.qmd), or [read my blog posts](blog.qmd)
+

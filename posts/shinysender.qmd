@@ -1,0 +1,78 @@
+---
+title: "Shinysender"
+date: 2022-11-24
+categories: 
+  - Shiny
+  - R 
+---
+  
+# Introduction
+  
+I'm currently running a pilot Shiny web hosting service at the University of Manchester.  One issue with the standalone (free) [Shiny Server](https://shiny.rstudio.com/articles/shiny-server.html) is that it's not particularly easy to deploy apps to it.  Essentially you have to copy them to the server (e.g. using `scp`), and sort out any library dependency issues. ~~RStudio's~~ Posit's commercial offerings, like ~~RStudio~~ Posit Connect make this process much easier, but are more expensive[^1].  
+
+To fill this gap, I wrote an R Package to simplify the deployment of apps to a standalone, open source Shiny Server: [Shinysender](https://github.com/UoMResearchIT/r-shinysender)
+
+## Usage - server setup 
+
+I designed the package to be as simple to use as possible, to minimise the amount of support required.   
+
+The server being deployed to is set up in the usual way.  A few R packages (shiny, rmarkdown, packrat and devtools) need to be installed for all users, and the server needs to be configured to serve apps from users' home directories.  It's also sensible to pre-install the "dev" versions of of system libraries that are required by common R packages (e.g. `libssl-dev`, `libxml2-dev` etc.; the full list of the ones I've used is in the README)
+
+Full details are provided in the [package's readme](https://github.com/UoMResearchIT/r-shinysender/blob/master/README.md#server-setup).  Users need an account on the server to be able to deploy to it.
+
+## Usage - app deployment
+
+The package isn't (yet) on CRAN, so it needs to be installed from github:
+
+```{r, eval=FALSE}
+install.packages("devtools")  # If you don't already have devtools installed
+devtools::install_github("UoMResearchIT/r-shinysender")
+```
+
+The server and username are determined by the `SHINYSENDER_SERVER` and `SHINYSENDER_USER` environment variables.  These can be set from the R console, or by adding them to `~/.Rprofile`/`~/.Renviron`:
+
+```{r}
+Sys.setenv(SHINYSENDER_SERVER="myshinyserver.mawds.co.uk")  
+Sys.setenv(SHINYSENDER_USER="david")
+```
+
+The "upload app" addin will appear in RStudio, and will deploy the current app to http://myshinyserver.mawds.co.uk/username/appname  The user is prompted for their password on the server (an ssh key will be used if available).
+
+The user's environment is replicated as closely as possible using Packrat.
+
+There are various options to allow the user to set the name of the app on the server, etc.  These are detailed in the [readme](https://github.com/UoMResearchIT/r-shinysender/blob/master/README.md).
+
+## How it works
+
+We use the [ssh](https://cran.r-project.org/package=ssh) library to drive the remote session.
+
+The app deployment process checks that the users `ShinyApps` directory exists and creates it if required.  We also create as `ShinyApps_staging` directory.
+
+We then use the [rsconnect](https://cran.r-project.org/package=rsconnect) library to prepare a "bundle" containing the app's code and dependencies.  The bundle is then uploaded over scp to the staging directory and decompressed
+
+We then upload a custom `.Rprofile` which sets up the cache directory for Packrat (so that a user can share R packages between their apps).  This doesn't actually _activate_ Packrat (see below).  We then restore the libraries into the Packrat environment, before swapping the `.Rprofile` for one that actually activates Packrat when the app is run.
+
+Assuming everything has worked, we then move the app directory from `ShinyApps_staging` to `ShinyApps`, to make it live.
+
+### Swapping .Rprofiles
+
+One feature I was keen on implementing was being able to install custom libraries from Github. These might be stored in a private repository.  To handle this, we set any local `GITHUB_PAT` on the remote before we restore the R packages (We do this as a single command, with history turned off, so the PAT is never actually stored on the server[^2]). 
+
+If we use the _same_ `.Rprofile` for deployment and staging, we won't have access to the (system-wide) `devtools` library, which is required to install packages from github.  Hence the need for a staging `.Rprofile` and a live one.
+
+I should add that our `.Rprofile` is appended to any existing `.Rprofile`, rather than being overwritten, so any settings the user has used will be preserved.
+
+
+## Limitations
+
+Shiny server doesn't let you use more than one version of R. Although we attempt to replicate the user's environment as closely as possible, this does mean that they're stuck with the version of R on the server. In practice, this hasn't proved an issue so far, but is likely to become problematic when R's major version increments.
+
+The usual limitations of hosting apps on the free version of Shiny server (i.e. an app only has a single process, which is shared by all users applies).  On my aspirational todo list is to deploy apps using [Shinyproxy](https://www.shinyproxy.io/) - this would mean each app was hosted in its own Docker container. In principle that should be fairly straightforward, since the packrat steps are generic.  From a security perspective it's more difficult, since the shinyproxy config would need to be modified by a privileged user to pick up the new app.  Essentially I'd need to write an API for the server to do this, rather than just "driving" a remote ssh session as the user.  
+
+It'd be better to run the whole thing behind an API, but since the Shiny apps are run as the user, and are deployed using the user account the security risks are much lower.  The server is locked down so users cannot see others' home directories etc.   
+
+
+
+[^1]: They also offer other features, like making the app more scalable if it has many concurrent users.
+
+[^2]: This was the most secure way I could think of doing this..if there are better ways I'd be grateful to hear of them.
