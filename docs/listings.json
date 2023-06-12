@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/travels/travels.html",
+      "/posts/powermon/powermon.html",
       "/posts/shinysender/shinysender.html"
     ]
   }

@@ -1,0 +1,7 @@
+---
+title: "Travels"
+date: 2023-06-12
+---
+
+I'm taking a few months career break to go travelling, which I plan to blog (hopefully more regularly than I manage here!) at  [https://travel.mawds.co.uk/index.php/europe-2023/](https://travel.mawds.co.uk/index.php/europe-2023/).  This is running on Wordpress, which is a lot easier to update on a phone than this Quarto based site.
+
