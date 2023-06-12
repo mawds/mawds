@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Travels\n\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n  \n\n\n\n\nNot so smart metering\n\n\n\n\n\n\n\nPython\n\n\nRaspberry Pi\n\n\n\n\n\n\n\n\n\n\n\nMar 21, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEasily deploying Shiny apps\n\n\n\n\n\n\n\nShiny\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "Adding epubs to Kobo from my phone\n\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTravels\n\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n  \n\n\n\n\nNot so smart metering\n\n\n\n\n\n\n\nPython\n\n\nRaspberry Pi\n\n\n\n\n\n\n\n\n\n\n\nMar 21, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEasily deploying Shiny apps\n\n\n\n\n\n\n\nShiny\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/powermon/powermon.html",
@@ -12,6 +12,27 @@
     "title": "Not so smart metering",
     "section": "",
     "text": "This project has been a while in the making, and I’ve finally got round to finishing it off (well as much as anything is finished). A big part of the delay was, somewhat ireonically, not having a power socket near the meters.\nI’m not a huge fan of Smart Meters - being able to be cut off remotely doesn’t seem a selling point, but I was curious how much energy I was using. I built a circuit with the Raspberry Pi to keep track of much gas and electricity I was using - this uses the GPIO pins to count the flashes on the electricity meter, using an LDR, and to count the rotations of the gas meter using a Hall probe (it turns out the 0 has a magnet in it, which can be detected as it rotates).\nThe measurements are much more precise for the electic meter - there are 1000 flashes per kWh, compared to ~9 per kWh for the gas meter.\nI was originally simply dumping the timestamps (and time difference between successive ones for each power source) into a CSV file, and looking at this in R.\nI wanted to make something where I could see at a glance how much energy I’d been using. I had an old Nook E-Reader, which I planed to use as a display. This blog post was very useful in figuring out how to do this.\ntldr; it runs Android 2.x, the apks linked to on that page were sideloaded via adb, so no need to set up a Google Account. The plan was to use Electic Sign to display a web page containing the current power usage.\n\n\nI’ve now switched to dumping the timestamps to a sqllite database, and am using FastAPI to generate an endpoint that I can display on the Nook:\n\n\n\n\nI plan to move the logging over to a “proper” database. Handling timestamps in Sqllite is a little fiddly. Doing some visualisation of the data is also on the list.\nCode is here"
+  },
+  {
+    "objectID": "posts/kobo/kobo.html",
+    "href": "posts/kobo/kobo.html",
+    "title": "Adding epubs to Kobo from my phone",
+    "section": "",
+    "text": "I’ve got a Kobo e-reader, which is very fussy about the USB cable used to copy books to it (and even the USB port the cable is connected to). I want to be able to sideload books from, e.g. Project Gutenberg to it from my phone. The (beta) web browser that’s included with the Kobo is very basic, and I’ve struggled to get it to work with most web sites, so the obvious solution doesn’t really work.\nWith thanks to this post, I figured out a way to do this.\nEssentially you download your books using Chrome on the phone, and then use termux, which give a Linux-like environment on the phone, to run a minimal web-server whose output works with the Kobo’s browser."
+  },
+  {
+    "objectID": "posts/kobo/kobo.html#setup",
+    "href": "posts/kobo/kobo.html#setup",
+    "title": "Adding epubs to Kobo from my phone",
+    "section": "Setup",
+    "text": "Setup\nAt the termux prompt: (this only needs to be done once)\ntermux-setup-storage # Gives access to the Download folder on android \npkg install python3 # Install Python"
+  },
+  {
+    "objectID": "posts/kobo/kobo.html#to-use",
+    "href": "posts/kobo/kobo.html#to-use",
+    "title": "Adding epubs to Kobo from my phone",
+    "section": "To use",
+    "text": "To use\nEnable tethering on the phone (I also found I had to disable the VPN running on the phone)\nAt the termux prompt:\nifconfig # Note the ip associated with wlan0\ncd ~/storage/downloads # Assuming this is where the book is\npython -m http.server 8080\nOn the Kobo, connect to the phone’s hotspot, open the browser (more, beta features), and navigate to http://<phone’s ip>:8080 This gives a very basic directory listing, which works OK on the Kobo"
   },
   {
     "objectID": "posts/shinysender/shinysender.html",

@@ -1,0 +1,43 @@
+---
+title: "Adding epubs to Kobo from my phone"
+date: 2023-06-12
+    
+---
+
+
+I've got a Kobo e-reader, which is very fussy about the USB cable used to copy books to it (and even the USB port the cable is connected to).
+I want to be able to sideload books from, e.g. [Project Gutenberg](https://www.gutenberg.org) to it from my phone.  The (beta) web browser that's included with 
+the Kobo is _very_ basic, and I've struggled to get it to work with most web sites, so the obvious solution doesn't really work.
+
+With thanks to [this post](https://medium.com/techtofreedom/this-is-how-i-set-up-an-http-server-on-my-android-phone-1fed20e4f0c8), I figured out a way to do
+this.
+
+Essentially you download your books using Chrome on the phone, and then use [termux](https://termux.com/), which give a Linux-like environment on the phone, to run a minimal web-server whose output works with the Kobo's browser.
+
+## Setup
+
+At the termux prompt: (this only needs to be done once)
+
+```{bash}
+termux-setup-storage # Gives access to the Download folder on android 
+pkg install python3 # Install Python
+```
+
+## To use
+
+Enable tethering on the phone (I also found I had to disable the VPN running on the phone)
+
+At the termux prompt:
+
+```{bash}
+ifconfig # Note the ip associated with wlan0
+cd ~/storage/downloads # Assuming this is where the book is
+python -m http.server 8080
+```
+
+On the Kobo, connect to the phone's hotspot, open the browser (more, beta features),
+and navigate to http://<phone's ip>:8080  This gives a very basic directory listing, which works OK on the Kobo
+
+
+
+
