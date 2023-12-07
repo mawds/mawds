@@ -12,8 +12,7 @@ website:
   open-graph: true 
   page-footer:
     center:
-    - text: <a href="https://www.github.com/mawds">Github</a> <a rel="me" href="https://mastodon.me.uk/@mawds">Mastodon</a> <script data-goatcounter="https://mawdsstats.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+    - text: <a href="https://www.github.com/mawds">Github</a> <a rel="me" href="https://mastodon.me.uk/@mawds">Mastodon</a> 
     
 resources:
   - CNAME
@@ -26,6 +25,7 @@ format:
     toc: true
     anchor-sections: true
     smooth-scroll: true
+    include-after-body: goatcounter.html
 
 
 
