@@ -13,13 +13,17 @@ about:
       href: https://github.com/mawds
 ---
 
-I am a Senior Research Software Engineer at the University of Manchester, responsible for the RSE team's data science and AI projects.  When I'm not working I enjoy bouldering, swimming, cycling and hiking.  I live in Bristol.
+I am a self employed data scientist/statistician/software engineer. When I'm not working I enjoy bouldering, swimming, cycling and hiking.  I live in Bristol.
 
 You can see my full career history on [Linkedin](https://www.linkedin.com/in/david-mawdsley-7477873/), but briefly:
 
 ## Experience
 
-Senior Research Software Engineer | University of Manchester | June 2021 - present
+Self Employed | [tupledata limited](https://www.tupledata.co.uk) | September 2023 - Present
+
+[Travelling](https://travel.maawds.co.uk) | Europe | Summer 2023
+
+Senior Research Software Engineer | University of Manchester | June 2021 - June 2023 
 
 Technical Director | Vuzo Ltd | April 2019 - May 2021 
 
