@@ -11,16 +11,15 @@ website:
       - blog.qmd
   open-graph: true 
   page-footer:
-    center:
-    - text: <a href="https://www.github.com/mawds">Github</a> <a rel="me" href="https://mastodon.me.uk/@mawds">Mastodon</a> 
+    border: false
+    center: <a href="https://www.github.com/mawds">Github</a> <a rel="me" href="https://mastodon.me.uk/@mawds">Mastodon</a> 
     
 resources:
   - CNAME
-  
     
 format:
   html:
-    theme: superhero 
+    theme: flatly 
     css: styles.css
     toc: true
     anchor-sections: true
