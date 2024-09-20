@@ -1,0 +1,13 @@
+---
+title: "Local fuel prices"
+date: 2024-09-20
+---
+
+I've recently launched a new site [localfuelprices.co.uk](https://localfuelprices.co.uk) to
+display the cost of [petrol](https://localfuelprices.co.uk/map/E10/) and [diesel](https://localfuelprices.co.uk/map/B7/)
+nearby petrol stations.
+
+
+It's built using [django](www.djangoproject.com) and [geodjango](https://docs.djangoproject.com/en/5.1/ref/contrib/gis/),
+with [leaflet](https://leafletjs.com/) for the mapping.
+
