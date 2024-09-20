@@ -11,6 +11,7 @@ about:
     - icon: github
       text: Github
       href: https://github.com/mawds
+      
 ---
 
 I am a self employed data scientist/statistician/software engineer. When I'm not working I enjoy bouldering, swimming, cycling and hiking.  I live in Bristol.

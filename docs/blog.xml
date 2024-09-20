@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>David Mawdsley</title>
+<link>https://www.mawds.co.uk/blog.html</link>
+<atom:link href="https://www.mawds.co.uk/blog.xml" rel="self" type="application/rss+xml"/>
+<description>David Mawdsley&#39;s blog</description>
+<generator>quarto-1.5.57</generator>
+<lastBuildDate>Sun, 11 Jun 2023 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Adding epubs to Kobo from my phone</title>
+  <link>https://www.mawds.co.uk/posts/kobo/kobo.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I’ve got a Kobo e-reader, which is very fussy about the USB cable used to copy books to it (and even the USB port the cable is connected to). I want to be able to sideload books from, e.g.&nbsp;<a href="https://www.gutenberg.org">Project Gutenberg</a> to it from my phone. The (beta) web browser that’s included with the Kobo is <em>very</em> basic, and I’ve struggled to get it to work with most web sites, so the obvious solution doesn’t really work.</p>
+<p>With thanks to <a href="https://medium.com/techtofreedom/this-is-how-i-set-up-an-http-server-on-my-android-phone-1fed20e4f0c8">this post</a>, I figured out a way to do this.</p>
+<p>Essentially you download your books using Chrome on the phone, and then use <a href="https://termux.com/">termux</a>, which give a Linux-like environment on the phone, to run a minimal web-server whose output works with the Kobo’s browser.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>At the termux prompt: (this only needs to be done once)</p>
+<pre class="{bash}"><code>termux-setup-storage # Gives access to the Download folder on android 
+pkg install python3 # Install Python</code></pre>
+</section>
+<section id="to-use" class="level2">
+<h2 class="anchored" data-anchor-id="to-use">To use</h2>
+<p>Enable tethering on the phone (I also found I had to disable the VPN running on the phone)</p>
+<p>At the termux prompt:</p>
+<pre class="{bash}"><code>ifconfig # Note the ip associated with wlan0
+cd ~/storage/downloads # Assuming this is where the book is
+python -m http.server 8080</code></pre>
+<p>On the Kobo, connect to the phone’s hotspot, open the browser (more, beta features), and navigate to http://&lt;phone’s ip&gt;:8080 This gives a very basic directory listing, which works OK on the Kobo</p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://www.mawds.co.uk/posts/kobo/kobo.html</guid>
+  <pubDate>Sun, 11 Jun 2023 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Travels</title>
+  <link>https://www.mawds.co.uk/posts/travels/travels.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I’m taking a few months career break to go travelling, which I plan to blog (hopefully more regularly than I manage here!) at <a href="https://travel.mawds.co.uk/index.php/europe-2023/">https://travel.mawds.co.uk/index.php/europe-2023/</a>. This is running on Wordpress, which is a lot easier to update on a phone than this Quarto based site.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.mawds.co.uk/posts/travels/travels.html</guid>
+  <pubDate>Sun, 11 Jun 2023 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Not so smart metering</title>
+  <link>https://www.mawds.co.uk/posts/powermon/powermon.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>This project has been a while in the making, and I’ve finally got round to finishing it off (well as much as anything is finished). A big part of the delay was, somewhat ireonically, not having a power socket near the meters.</p>
+<p>I’m not a huge fan of Smart Meters - being able to be cut off remotely doesn’t seem a selling point, but I was curious how much energy I was using. I built a circuit with the Raspberry Pi to keep track of much gas and electricity I was using - this uses the GPIO pins to count the flashes on the electricity meter, using an LDR, and to count the rotations of the gas meter using a Hall probe (it turns out the 0 has a magnet in it, which can be detected as it rotates).</p>
+<p>The measurements are much more precise for the electic meter - there are 1000 flashes per kWh, compared to ~9 per kWh for the gas meter.</p>
+<p>I was originally simply dumping the timestamps (and time difference between successive ones for each power source) into a CSV file, and looking at this in R.</p>
+<p>I wanted to make something where I could see at a glance how much energy I’d been using. I had an old <a href="https://www.johnlewis.com/nook-simple-touch-ereader/p231759496">Nook E-Reader</a>, which I planed to use as a display. <a href="https://shkspr.mobi/blog/2020/02/turn-an-old-ereader-into-an-information-screen-nook-str/">This blog post</a> was very useful in figuring out how to do this.</p>
+<p>tldr; it runs Android 2.x, the apks linked to on that page were sideloaded via adb, so no need to set up a Google Account. The plan was to use Electic Sign to display a web page containing the current power usage.</p>
+<section id="sqllite-and-fastapi" class="level2">
+<h2 class="anchored" data-anchor-id="sqllite-and-fastapi">Sqllite and FastAPI</h2>
+<p>I’ve now switched to dumping the timestamps to a sqllite database, and am using FastAPI to generate an endpoint that I can display on the Nook:</p>
+<p><img src="https://www.mawds.co.uk/posts/powermon/api.png" class="img-fluid" alt="Example screenshot from API"></p>
+</section>
+<section id="futher-work" class="level2">
+<h2 class="anchored" data-anchor-id="futher-work">Futher work</h2>
+<p>I plan to move the logging over to a “proper” database. Handling timestamps in Sqllite is a little fiddly. Doing some visualisation of the data is also on the list.</p>
+<p>Code is <a href="https://www.github.com/mawds/powermon">here</a></p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>Python</category>
+  <category>Raspberry Pi</category>
+  <guid>https://www.mawds.co.uk/posts/powermon/powermon.html</guid>
+  <pubDate>Tue, 21 Mar 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Easily deploying Shiny apps</title>
+  <link>https://www.mawds.co.uk/posts/shinysender/shinysender.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>I’m currently running a pilot Shiny web hosting service at the University of Manchester. One issue with the standalone (free) <a href="https://shiny.rstudio.com/articles/shiny-server.html">Shiny Server</a> is that it’s not particularly easy to deploy apps to it. Essentially you have to copy them to the server (e.g.&nbsp;using <code>scp</code>), and sort out any library dependency issues. <del>RStudio’s</del> Posit’s commercial offerings, like <del>RStudio</del> Posit Connect make this process much easier, but are more expensive<sup>1</sup>.</p>
+<p>To fill this gap, I wrote an R Package to simplify the deployment of apps to a standalone, open source Shiny Server: <a href="https://github.com/UoMResearchIT/r-shinysender">Shinysender</a></p>
+<section id="usage---server-setup" class="level2">
+<h2 class="anchored" data-anchor-id="usage---server-setup">Usage - server setup</h2>
+<p>I designed the package to be as simple to use as possible, to minimise the amount of support required.</p>
+<p>The server being deployed to is set up in the usual way. A few R packages (shiny, rmarkdown, packrat and devtools) need to be installed for all users, and the server needs to be configured to serve apps from users’ home directories. It’s also sensible to pre-install the “dev” versions of of system libraries that are required by common R packages (e.g.&nbsp;<code>libssl-dev</code>, <code>libxml2-dev</code> etc.; the full list of the ones I’ve used is in the README)</p>
+<p>Full details are provided in the <a href="https://github.com/UoMResearchIT/r-shinysender/blob/master/README.md#server-setup">package’s readme</a>. Users need an account on the server to be able to deploy to it.</p>
+</section>
+<section id="usage---app-deployment" class="level2">
+<h2 class="anchored" data-anchor-id="usage---app-deployment">Usage - app deployment</h2>
+<p>The package isn’t (yet) on CRAN, so it needs to be installed from github:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"devtools"</span>)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># If you don't already have devtools installed</span></span>
+<span id="cb1-2">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install_github</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"UoMResearchIT/r-shinysender"</span>)</span></code></pre></div>
+</div>
+<p>The server and username are determined by the <code>SHINYSENDER_SERVER</code> and <code>SHINYSENDER_USER</code> environment variables. These can be set from the R console, or by adding them to <code>~/.Rprofile</code>/<code>~/.Renviron</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SHINYSENDER_SERVER=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"myshinyserver.mawds.co.uk"</span>)  </span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SHINYSENDER_USER=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"david"</span>)</span></code></pre></div>
+</div>
+<p>The “upload app” addin will appear in RStudio, and will deploy the current app to http://myshinyserver.mawds.co.uk/username/appname The user is prompted for their password on the server (an ssh key will be used if available).</p>
+<p>The user’s environment is replicated as closely as possible using Packrat.</p>
+<p>There are various options to allow the user to set the name of the app on the server, etc. These are detailed in the <a href="https://github.com/UoMResearchIT/r-shinysender/blob/master/README.md">readme</a>.</p>
+</section>
+<section id="how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
+<p>We use the <a href="https://cran.r-project.org/package=ssh">ssh</a> library to drive the remote session.</p>
+<p>The app deployment process checks that the users <code>ShinyApps</code> directory exists and creates it if required. We also create as <code>ShinyApps_staging</code> directory.</p>
+<p>We then use the <a href="https://cran.r-project.org/package=rsconnect">rsconnect</a> library to prepare a “bundle” containing the app’s code and dependencies. The bundle is then uploaded over scp to the staging directory and decompressed</p>
+<p>We then upload a custom <code>.Rprofile</code> which sets up the cache directory for Packrat (so that a user can share R packages between their apps). This doesn’t actually <em>activate</em> Packrat (see below). We then restore the libraries into the Packrat environment, before swapping the <code>.Rprofile</code> for one that actually activates Packrat when the app is run.</p>
+<p>Assuming everything has worked, we then move the app directory from <code>ShinyApps_staging</code> to <code>ShinyApps</code>, to make it live.</p>
+<section id="swapping-.rprofiles" class="level3">
+<h3 class="anchored" data-anchor-id="swapping-.rprofiles">Swapping .Rprofiles</h3>
+<p>One feature I was keen on implementing was being able to install custom libraries from Github. These might be stored in a private repository. To handle this, we set any local <code>GITHUB_PAT</code> on the remote before we restore the R packages (We do this as a single command, with history turned off, so the PAT is never actually stored on the server<sup>2</sup>).</p>
+<p>If we use the <em>same</em> <code>.Rprofile</code> for deployment and staging, we won’t have access to the (system-wide) <code>devtools</code> library, which is required to install packages from github. Hence the need for a staging <code>.Rprofile</code> and a live one.</p>
+<p>I should add that our <code>.Rprofile</code> is appended to any existing <code>.Rprofile</code>, rather than being overwritten, so any settings the user has used will be preserved.</p>
+</section>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<p>Shiny server doesn’t let you use more than one version of R. Although we attempt to replicate the user’s environment as closely as possible, this does mean that they’re stuck with the version of R on the server. In practice, this hasn’t proved an issue so far, but is likely to become problematic when R’s major version increments.</p>
+<p>The usual limitations of hosting apps on the free version of Shiny server (i.e.&nbsp;an app only has a single process, which is shared by all users applies). On my aspirational todo list is to deploy apps using <a href="https://www.shinyproxy.io/">Shinyproxy</a> - this would mean each app was hosted in its own Docker container. In principle that should be fairly straightforward, since the packrat steps are generic. From a security perspective it’s more difficult, since the shinyproxy config would need to be modified by a privileged user to pick up the new app. Essentially I’d need to write an API for the server to do this, rather than just “driving” a remote ssh session as the user.</p>
+<p>It’d be better to run the whole thing behind an API, but since the Shiny apps are run as the user, and are deployed using the user account the security risks are much lower. The server is locked down so users cannot see others’ home directories etc.</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>They also offer other features, like making the app more scalable if it has many concurrent users.↩︎</p></li>
+<li id="fn2"><p>This was the most secure way I could think of doing this..if there are better ways I’d be grateful to hear of them.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>Shiny</category>
+  <category>R</category>
+  <guid>https://www.mawds.co.uk/posts/shinysender/shinysender.html</guid>
+  <pubDate>Thu, 24 Nov 2022 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

@@ -4,16 +4,22 @@ project:
 
 website:
   title: "David Mawdsley"
+  site-url: https://www.mawds.co.uk
+  description: "David Mawdsley's blog"
   navbar:
     background: primary
     left:
       - href: index.qmd
         text: "About"
       - blog.qmd
+    right:
+      - icon: rss
+        href: index.xml
   open-graph: true 
   page-footer:
     border: false
     center: <a href="https://www.github.com/mawds">Github</a> <a rel="me" href="https://mastodon.me.uk/@mawds">Mastodon</a> 
+  
     
 resources:
   - CNAME
