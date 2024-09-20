@@ -10,8 +10,9 @@ website:
     background: primary
     left:
       - href: index.qmd
+        text: "Blog"
+      - href: about.qmd
         text: "About"
-      - blog.qmd
     right:
       - icon: rss
         href: index.xml

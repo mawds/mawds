@@ -1,10 +1,24 @@
 [
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About me",
     "section": "",
-    "text": "Adding epubs to Kobo from my phone\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nTravels\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nNot so smart metering\n\n\n\n\n\n\nPython\n\n\nRaspberry Pi\n\n\n\n\n\n\n\n\n\nMar 21, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nEasily deploying Shiny apps\n\n\n\n\n\n\nShiny\n\n\nR\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "I am a self employed data scientist/statistician/software engineer. When I’m not working I enjoy bouldering, swimming, cycling and hiking. I live in Bristol.\nYou can see my full career history on Linkedin, but briefly:"
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "About me",
+    "section": "Experience",
+    "text": "Experience\nSelf Employed | tupledata limited | September 2023 - Present\nTravelling | Europe | Summer 2023\nSenior Research Software Engineer | University of Manchester | June 2021 - June 2023\nTechnical Director | Vuzo Ltd | April 2019 - May 2021\nInterim Infrastructure Director | DataHE | Febuary 2019 - March 2019\nResearch Software Engineer | University of Manchester | November 2016 - January 2019\nResearch Assistant -&gt; Senior Research Associate | University of Bristol | September 2013 - January 2015\nAnalyst -&gt; Senior Analyst | Higher Education Funding Council for England | July 2007 to September 2013"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About me",
+    "section": "Education",
+    "text": "Education\nMSc Medical Statistics | University of Leicester | October 2013 - September 2014\nPhD Department of Physics | University of Bath | October 2003 - January 2007\nMPhys Physics with Computational Physics | University of Sussex | October 1999 to June 2003"
   },
   {
     "objectID": "posts/travels/travels.html",
@@ -37,23 +51,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "About me",
+    "title": "Blog",
     "section": "",
-    "text": "I am a self employed data scientist/statistician/software engineer. When I’m not working I enjoy bouldering, swimming, cycling and hiking. I live in Bristol.\nYou can see my full career history on Linkedin, but briefly:"
-  },
-  {
-    "objectID": "index.html#experience",
-    "href": "index.html#experience",
-    "title": "About me",
-    "section": "Experience",
-    "text": "Experience\nSelf Employed | tupledata limited | September 2023 - Present\nTravelling | Europe | Summer 2023\nSenior Research Software Engineer | University of Manchester | June 2021 - June 2023\nTechnical Director | Vuzo Ltd | April 2019 - May 2021\nInterim Infrastructure Director | DataHE | Febuary 2019 - March 2019\nResearch Software Engineer | University of Manchester | November 2016 - January 2019\nResearch Assistant -&gt; Senior Research Associate | University of Bristol | September 2013 - January 2015\nAnalyst -&gt; Senior Analyst | Higher Education Funding Council for England | July 2007 to September 2013"
-  },
-  {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "About me",
-    "section": "Education",
-    "text": "Education\nMSc Medical Statistics | University of Leicester | October 2013 - September 2014\nPhD Department of Physics | University of Bath | October 2003 - January 2007\nMPhys Physics with Computational Physics | University of Sussex | October 1999 to June 2003"
+    "text": "Adding epubs to Kobo from my phone\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nTravels\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nNot so smart metering\n\n\n\n\n\n\nPython\n\n\nRaspberry Pi\n\n\n\n\n\n\n\n\n\nMar 21, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nEasily deploying Shiny apps\n\n\n\n\n\n\nShiny\n\n\nR\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/kobo/kobo.html",

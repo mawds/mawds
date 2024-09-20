@@ -6,8 +6,8 @@
       version="2.0">
 <channel>
 <title>David Mawdsley</title>
-<link>https://www.mawds.co.uk/blog.html</link>
-<atom:link href="https://www.mawds.co.uk/blog.xml" rel="self" type="application/rss+xml"/>
+<link>https://www.mawds.co.uk/</link>
+<atom:link href="https://www.mawds.co.uk/index.xml" rel="self" type="application/rss+xml"/>
 <description>David Mawdsley&#39;s blog</description>
 <generator>quarto-1.5.57</generator>
 <lastBuildDate>Sun, 11 Jun 2023 23:00:00 GMT</lastBuildDate>

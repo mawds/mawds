@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Blog – David Mawdsley</title>
+<title>About me – David Mawdsley</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,12 +30,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -68,69 +65,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="David Mawdsley" href="blog.xml" data-external="1"><meta property="og:title" content="Blog – David Mawdsley">
+<meta property="og:title" content="About me – David Mawdsley">
+<meta property="og:description" content="David Mawdsley’s blog">
 <meta property="og:site_name" content="David Mawdsley">
 </head>
 
@@ -153,11 +93,11 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
-<span class="menu-text">Blog</span></a>
+    <a class="nav-link active" href="./about.html" aria-current="page"> 
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -174,161 +114,65 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Raspberry Pi">Raspberry Pi <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Shiny">Shiny <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+  <ul>
+  <li><a href="#experience" id="toc-experience" class="nav-link active" data-scroll-target="#experience">Experience</a></li>
+  <li><a href="#education" id="toc-education" class="nav-link" data-scroll-target="#education">Education</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-about-jolla">
+  <img src="dmpic.jpg" class="about-image
+  round " style="height: 15em; width: 15em;">
+ <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Blog</h1>
+<h1 class="title">About me</h1>
 </div>
-
-
-
-<div class="quarto-title-meta column-page-left">
-
-    
-  
-    
+<div class="quarto-title-meta">
   </div>
-  
+</header><main class="content" id="quarto-document-content">
+
+<p>I am a self employed data scientist/statistician/software engineer. When I’m not working I enjoy bouldering, swimming, cycling and hiking. I live in Bristol.</p>
+<p>You can see my full career history on <a href="https://www.linkedin.com/in/david-mawdsley-7477873/">Linkedin</a>, but briefly:</p>
+<section id="experience" class="level2">
+<h2 data-anchor-id="experience">Experience</h2>
+<p>Self Employed | <a href="https://www.tupledata.co.uk">tupledata limited</a> | September 2023 - Present</p>
+<p><a href="https://travel.maawds.co.uk">Travelling</a> | Europe | Summer 2023</p>
+<p>Senior Research Software Engineer | University of Manchester | June 2021 - June 2023</p>
+<p>Technical Director | Vuzo Ltd | April 2019 - May 2021</p>
+<p>Interim Infrastructure Director | DataHE | Febuary 2019 - March 2019</p>
+<p>Research Software Engineer | University of Manchester | November 2016 - January 2019</p>
+<p>Research Assistant -&gt; Senior Research Associate | University of Bristol | September 2013 - January 2015</p>
+<p>Analyst -&gt; Senior Analyst | Higher Education Funding Council for England | July 2007 to September 2013</p>
+</section>
+<section id="education" class="level2">
+<h2 data-anchor-id="education">Education</h2>
+<p>MSc Medical Statistics | University of Leicester | October 2013 - September 2014</p>
+<p>PhD Department of Physics | University of Bath | October 2003 - January 2007</p>
+<p>MPhys Physics with Computational Physics | University of Sussex | October 1999 to June 2003</p>
 
 
-</header>
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1686524400000" data-listing-file-modified-sort="1726819040726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="218">
-<div class="thumbnail">
-<p><a href="./posts/kobo/kobo.html" class="no-external"></a></p><a href="./posts/kobo/kobo.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/kobo/kobo.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/kobo/kobo.html" class="no-external">Adding epubs to Kobo from my phone</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/kobo/kobo.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/kobo/kobo.html" class="no-external">I’ve got a Kobo e-reader, which is very fussy about the USB cable used to copy books to it (and even the USB port the cable is connected to). I want to be able to sideload…<em></em></a>
+</section>
+</main> 
+  <hr class="about-sep">
+   <div class="about-links">
+  <a href="https://mastodon.me.uk/@mawds" class="about-link" rel="" target="">
+    <i class="bi bi-mastodon"></i>
+     <span class="about-link-text">Mastodon</span>
+  </a>
+  <a href="https://github.com/mawds" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
 </div>
 </div>
-<div class="metadata">
-<a href="./posts/kobo/kobo.html" class="no-external">
-<div class="listing-date">
-Jun 12, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1686524400000" data-listing-file-modified-sort="1726819040726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="46">
-<div class="thumbnail">
-<p><a href="./posts/travels/travels.html" class="no-external"></a></p><a href="./posts/travels/travels.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/travels/travels.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/travels/travels.html" class="no-external">Travels</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/travels/travels.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/travels/travels.html" class="no-external">I’m taking a few months career break to go travelling, which I plan to blog (hopefully more regularly than I manage here!) at https://travel.mawds.co.uk/index.php/europe-2023/…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/travels/travels.html" class="no-external">
-<div class="listing-date">
-Jun 12, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Python,Raspberry Pi" data-listing-date-sort="1679356800000" data-listing-file-modified-sort="1726819040726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="340">
-<div class="thumbnail">
-<p><a href="./posts/powermon/powermon.html" class="no-external"></a></p><a href="./posts/powermon/powermon.html" class="no-external">
-<p class="card-img-top"><img src="posts/powermon/api.png" alt="Example screenshot from API"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/powermon/powermon.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/powermon/powermon.html" class="no-external">Not so smart metering</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/powermon/powermon.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
-Python
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Raspberry Pi'); return false;">
-Raspberry Pi
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/powermon/powermon.html" class="no-external">This project has been a while in the making, and I’ve finally got round to finishing it off (well as much as anything is finished). A big part of the delay was, somewhat…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/powermon/powermon.html" class="no-external">
-<div class="listing-date">
-Mar 21, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="Shiny,R" data-listing-date-sort="1669248000000" data-listing-file-modified-sort="1726819040726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="882">
-<div class="thumbnail">
-<p><a href="./posts/shinysender/shinysender.html" class="no-external"></a></p><a href="./posts/shinysender/shinysender.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/shinysender/shinysender.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/shinysender/shinysender.html" class="no-external">Easily deploying Shiny apps</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/shinysender/shinysender.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Shiny'); return false;">
-Shiny
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/shinysender/shinysender.html" class="no-external">I’m currently running a pilot Shiny web hosting service at the University of Manchester. One issue with the standalone (free) Shiny Server is that it’s not particularly easy…<code></code><del></del><del></del><sup></sup></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/shinysender/shinysender.html" class="no-external">
-<div class="listing-date">
-Nov 24, 2022
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+ <!-- /main -->
 <script data-goatcounter="https://mawdsstats.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
 <script id="quarto-html-after-body" type="application/javascript">
@@ -351,13 +195,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
