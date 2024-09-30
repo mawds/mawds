@@ -20,6 +20,9 @@ website:
   page-footer:
     border: false
     center: <a href="https://www.github.com/mawds">Github</a> <a rel="me" href="https://mastodon.me.uk/@mawds">Mastodon</a> 
+comments:
+  giscus: 
+    repo: mawds/mawds
   
     
 resources:
