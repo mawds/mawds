@@ -7,5 +7,6 @@ listing:
   categories: true
   feed: true
 page-layout: full
+comments: false
 
 ---
