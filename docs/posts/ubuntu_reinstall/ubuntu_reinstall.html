@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-11-15">
 
-<title>David Mawdsley’s Blog – David Mawdsley</title>
+<title>Ubuntu 24.04 upgrade – David Mawdsley</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,69 +67,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="David Mawdsley" href="index.xml" data-external="1"><meta property="og:title" content="David Mawdsley’s Blog – David Mawdsley">
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Ubuntu 24.04 upgrade – David Mawdsley">
+<meta property="og:description" content="David Mawdsley’s blog">
 <meta property="og:site_name" content="David Mawdsley">
 </head>
 
@@ -141,7 +83,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">David Mawdsley</span>
     </a>
   </div>
@@ -152,17 +94,17 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -174,25 +116,31 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Raspberry Pi">Raspberry Pi <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Shiny">Shiny <span class="quarto-category-count">(1)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">David Mawdsley’s Blog</h1>
+<h1 class="title">Ubuntu 24.04 upgrade</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 15, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -202,183 +150,36 @@ window.Quarto = {
 </header>
 
 
+<p>I recently had to reinstall Ubuntu on my ageing Thinkpad X260, after the upgrade from 22.04 to 24.04 went horribly wrong.</p>
+<p>I’m still not quite sure what went wrong. It <em>think</em> I’d somehow ended up with (only) the 22.04 kernel installed, which led to lots of “Unknown symbol” errors. My system was quite heavily customised, so it was perhaps a bit optimistic to expect the upgrade to work.</p>
+<p>This post is mostly a note to self about how I reconfigured the dual boot setup in case I need to do it again (which I hope I don’t).</p>
+<p>I initially thought it was <em>only</em> the kernel that was the problem. <a href="https://askubuntu.com/a/528295">This stackexchange post</a> was really useful for mounting the encrypted drive, setting up a chroot environment and reinstalling the kernel. That got me booting to the command prompt.</p>
+<p>It turned out I was missing most packages, at which point I decided to wipe and restore from backups.</p>
+<p>(I could actually access my encrypted drive through the Ubuntu Live<del>CD</del>USB, so took a fresh backup of <code>/home</code> and <code>/etc</code> from this)</p>
+<p>I’d got an (essentially unused and tiny) Windows 10 partition dual booting with Ubuntu. I was keen to keep Windows 10 on the machine, as it’s occasionally useful. I’d previously set this up to dual boot with full disk encryption for both OSs roughly following the guide <a href="https://www.mikekasberg.com/blog/2020/04/08/dual-boot-ubuntu-and-windows-with-encryption.html">here</a>, but using the legacy BIOS, as that’s what Windows 10 had come preinstalled with.</p>
+<p>I was pleased to see that the guide had been <a href="https://www.mikekasberg.com/blog/2024/05/20/dual-boot-ubuntu-24-04-and-windows-with-encryption.html">updated for Ubuntu 24.04</a> and is now <em>much</em> easier. I took this opportunity to wipe the Windows partition and switch to UEFI too.</p>
+<p>The basic process was:</p>
+<ul>
+<li>Use Ubuntu 24.04 USB image to check backups are OK and work</li>
+<li>Use the Ubuntu USB image and gparted to remove all partitions</li>
+<li>Reboot and set the BIOS to UEFI mode (only) (Startup menu in BIOS), and check the security chip is set to “Intel PTT”.</li>
+<li>Install Windows 10 Pro from installation USB (avoiding creating a Microsoft account by selecting “Work or school account” then “Domain join instead” <a href="https://helpdeskgeek.com/windows-10/how-to-setup-windows-10-without-a-microsoft-account/">via</a></li>
+<li>Install interminable updates and reboot lots of times (I kept force checking for updates until there were no more). (Bitlocker is not enabled at this point)</li>
+<li>Reboot with the Ubuntu USB image</li>
+<li>Follow the instructions at https://www.mikekasberg.com/blog/2024/05/20/dual-boot-ubuntu-24-04-and-windows-with-encryption.html to setup the dual boot with an encrypted partition setup.</li>
+<li>Check both still boot</li>
+<li>Enable bitlocker on the Windows partition <strong>You need to boot Windows via the BIOS’s boot menu (F12 on my machine), not via Grub, otherwise it will prompt you for the bitlocker recovery key on boot</strong> (details of how I removed the Windows option from Grub below)</li>
+</ul>
+<p>Once everything was working, I rebooted using the USB image to mount my nfs share containing the backups and restored my data.</p>
+<p>A few post install tweaks:</p>
+<p>Hibernate doesn’t work out of the box. I enabled this following the guide on <a href="https://elbrarc.at/blog/2024/05/30/ubuntu-fde-hibernate-tpm-secureboot.html">Elbrar’s corner</a>. This requires booting with the USB image again, to resize volumes to make space for the encrypted swap partition (with hindsight, the resizing would probably have been quicker if I did this <em>before</em> restoring my data; even so, it was only a few minutes). I didn’t follow the “Install Clevis” section, as I prefer to enter the decryption key before the machine boots. I used the <a href="https://extensions.gnome.org/extension/755/hibernate-status-button/">Hibernate Status Button extension</a> to enable the hibernate menu option on the desktop.</p>
+<p>Suspend didn’t work properly. The system would suspend, but not wake up. I eventually solved this via <a href="https://askubuntu.com/questions/1523542/thinkpad-t460-shutdown-suspend-in-ubuntu-24-04">this Stackexchange post</a>. You need to add <code>intel_iommu=off</code> to the <code>GRUB_CMDLINE_LINUX_DEFAULT</code> options in <code>/etc/default/grub</code> and then <code>update-grub</code>.</p>
+<p>I also took this opportunity to add <code>DISABLE_OS_PROBER=true</code> to the file, so we don’t have the option to boot to Windows from grub, which causes issues with Bitlocker, as mentioned above.</p>
+<p>I also had to force an update of the installed Snaps so that Firefox was at the same version as on the 20.04 system, so that it would load my profile data. Presumably this would’ve happend automatically at some point anyway.</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1731628800000" data-listing-file-modified-sort="1731672533254" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="659">
-<div class="thumbnail">
-<p><a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external"></a></p><a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external">Ubuntu 24.04 upgrade</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external">I recently had to reinstall Ubuntu on my ageing Thinkpad X260, after the upgrade from 22.04 to 24.04 went horribly wrong.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external">
-<div class="listing-date">
-Nov 15, 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1726786800000" data-listing-file-modified-sort="1726828106659" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25">
-<div class="thumbnail">
-<p><a href="./posts/fuelprice/fuelprice.html" class="no-external"></a></p><a href="./posts/fuelprice/fuelprice.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/fuelprice/fuelprice.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/fuelprice/fuelprice.html" class="no-external">Local fuel prices</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/fuelprice/fuelprice.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/fuelprice/fuelprice.html" class="no-external">I’ve recently launched a new site localfuelprices.co.uk to display the cost of petrol and diesel nearby petrol stations.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/fuelprice/fuelprice.html" class="no-external">
-<div class="listing-date">
-Sep 20, 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1686524400000" data-listing-file-modified-sort="1726819040726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="218">
-<div class="thumbnail">
-<p><a href="./posts/kobo/kobo.html" class="no-external"></a></p><a href="./posts/kobo/kobo.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/kobo/kobo.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/kobo/kobo.html" class="no-external">Adding epubs to Kobo from my phone</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/kobo/kobo.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/kobo/kobo.html" class="no-external">I’ve got a Kobo e-reader, which is very fussy about the USB cable used to copy books to it (and even the USB port the cable is connected to). I want to be able to sideload…<em></em></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/kobo/kobo.html" class="no-external">
-<div class="listing-date">
-Jun 12, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1686524400000" data-listing-file-modified-sort="1726819040726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="46">
-<div class="thumbnail">
-<p><a href="./posts/travels/travels.html" class="no-external"></a></p><a href="./posts/travels/travels.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/travels/travels.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/travels/travels.html" class="no-external">Travels</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/travels/travels.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/travels/travels.html" class="no-external">I’m taking a few months career break to go travelling, which I plan to blog (hopefully more regularly than I manage here!) at https://travel.mawds.co.uk/index.php/europe-2023/…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/travels/travels.html" class="no-external">
-<div class="listing-date">
-Jun 12, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Python,Raspberry Pi" data-listing-date-sort="1679356800000" data-listing-file-modified-sort="1726819040726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="340">
-<div class="thumbnail">
-<p><a href="./posts/powermon/powermon.html" class="no-external"></a></p><a href="./posts/powermon/powermon.html" class="no-external">
-<p class="card-img-top"><img src="posts/powermon/api.png" alt="Example screenshot from API"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/powermon/powermon.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/powermon/powermon.html" class="no-external">Not so smart metering</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/powermon/powermon.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Python'); return false;">
-Python
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Raspberry Pi'); return false;">
-Raspberry Pi
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/powermon/powermon.html" class="no-external">This project has been a while in the making, and I’ve finally got round to finishing it off (well as much as anything is finished). A big part of the delay was, somewhat…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/powermon/powermon.html" class="no-external">
-<div class="listing-date">
-Mar 21, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="Shiny,R" data-listing-date-sort="1669248000000" data-listing-file-modified-sort="1726819040726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="882">
-<div class="thumbnail">
-<p><a href="./posts/shinysender/shinysender.html" class="no-external"></a></p><a href="./posts/shinysender/shinysender.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/shinysender/shinysender.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/shinysender/shinysender.html" class="no-external">Easily deploying Shiny apps</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/shinysender/shinysender.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Shiny'); return false;">
-Shiny
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/shinysender/shinysender.html" class="no-external">I’m currently running a pilot Shiny web hosting service at the University of Manchester. One issue with the standalone (free) Shiny Server is that it’s not particularly easy…<code></code><del></del><del></del><sup></sup></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/shinysender/shinysender.html" class="no-external">
-<div class="listing-date">
-Nov 24, 2022
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script data-goatcounter="https://mawdsstats.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
 <script id="quarto-html-after-body" type="application/javascript">
@@ -801,6 +602,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="mawds/mawds" data-repo-id="R_kgDOIuNKpA" data-category="General" data-category-id="DIC_kwDOIuNKpM4Ci7Ei" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -819,5 +624,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

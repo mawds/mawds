@@ -28,32 +28,11 @@
     "text": "I’m taking a few months career break to go travelling, which I plan to blog (hopefully more regularly than I manage here!) at https://travel.mawds.co.uk/index.php/europe-2023/. This is running on Wordpress, which is a lot easier to update on a phone than this Quarto based site."
   },
   {
-    "objectID": "posts/kobo/kobo.html",
-    "href": "posts/kobo/kobo.html",
-    "title": "Adding epubs to Kobo from my phone",
+    "objectID": "posts/ubuntu_reinstall/ubuntu_reinstall.html",
+    "href": "posts/ubuntu_reinstall/ubuntu_reinstall.html",
+    "title": "Ubuntu 24.04 upgrade",
     "section": "",
-    "text": "I’ve got a Kobo e-reader, which is very fussy about the USB cable used to copy books to it (and even the USB port the cable is connected to). I want to be able to sideload books from, e.g. Project Gutenberg to it from my phone. The (beta) web browser that’s included with the Kobo is very basic, and I’ve struggled to get it to work with most web sites, so the obvious solution doesn’t really work.\nWith thanks to this post, I figured out a way to do this.\nEssentially you download your books using Chrome on the phone, and then use termux, which give a Linux-like environment on the phone, to run a minimal web-server whose output works with the Kobo’s browser."
-  },
-  {
-    "objectID": "posts/kobo/kobo.html#setup",
-    "href": "posts/kobo/kobo.html#setup",
-    "title": "Adding epubs to Kobo from my phone",
-    "section": "Setup",
-    "text": "Setup\nAt the termux prompt: (this only needs to be done once)\ntermux-setup-storage # Gives access to the Download folder on android \npkg install python3 # Install Python"
-  },
-  {
-    "objectID": "posts/kobo/kobo.html#to-use",
-    "href": "posts/kobo/kobo.html#to-use",
-    "title": "Adding epubs to Kobo from my phone",
-    "section": "To use",
-    "text": "To use\nEnable tethering on the phone (I also found I had to disable the VPN running on the phone)\nAt the termux prompt:\nifconfig # Note the ip associated with wlan0\ncd ~/storage/downloads # Assuming this is where the book is\npython -m http.server 8080\nOn the Kobo, connect to the phone’s hotspot, open the browser (more, beta features), and navigate to http://&lt;phone’s ip&gt;:8080 This gives a very basic directory listing, which works OK on the Kobo"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "David Mawdsley’s Blog",
-    "section": "",
-    "text": "Local fuel prices\n\n\n\n\n\n\n\n\n\n\n\nSep 20, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nAdding epubs to Kobo from my phone\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nTravels\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nNot so smart metering\n\n\n\n\n\n\nPython\n\n\nRaspberry Pi\n\n\n\n\n\n\n\n\n\nMar 21, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nEasily deploying Shiny apps\n\n\n\n\n\n\nShiny\n\n\nR\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "I recently had to reinstall Ubuntu on my ageing Thinkpad X260, after the upgrade from 22.04 to 24.04 went horribly wrong.\nI’m still not quite sure what went wrong. It think I’d somehow ended up with (only) the 22.04 kernel installed, which led to lots of “Unknown symbol” errors. My system was quite heavily customised, so it was perhaps a bit optimistic to expect the upgrade to work.\nThis post is mostly a note to self about how I reconfigured the dual boot setup in case I need to do it again (which I hope I don’t).\nI initially thought it was only the kernel that was the problem. This stackexchange post was really useful for mounting the encrypted drive, setting up a chroot environment and reinstalling the kernel. That got me booting to the command prompt.\nIt turned out I was missing most packages, at which point I decided to wipe and restore from backups.\n(I could actually access my encrypted drive through the Ubuntu LiveCDUSB, so took a fresh backup of /home and /etc from this)\nI’d got an (essentially unused and tiny) Windows 10 partition dual booting with Ubuntu. I was keen to keep Windows 10 on the machine, as it’s occasionally useful. I’d previously set this up to dual boot with full disk encryption for both OSs roughly following the guide here, but using the legacy BIOS, as that’s what Windows 10 had come preinstalled with.\nI was pleased to see that the guide had been updated for Ubuntu 24.04 and is now much easier. I took this opportunity to wipe the Windows partition and switch to UEFI too.\nThe basic process was:\n\nUse Ubuntu 24.04 USB image to check backups are OK and work\nUse the Ubuntu USB image and gparted to remove all partitions\nReboot and set the BIOS to UEFI mode (only) (Startup menu in BIOS), and check the security chip is set to “Intel PTT”.\nInstall Windows 10 Pro from installation USB (avoiding creating a Microsoft account by selecting “Work or school account” then “Domain join instead” via\nInstall interminable updates and reboot lots of times (I kept force checking for updates until there were no more). (Bitlocker is not enabled at this point)\nReboot with the Ubuntu USB image\nFollow the instructions at https://www.mikekasberg.com/blog/2024/05/20/dual-boot-ubuntu-24-04-and-windows-with-encryption.html to setup the dual boot with an encrypted partition setup.\nCheck both still boot\nEnable bitlocker on the Windows partition You need to boot Windows via the BIOS’s boot menu (F12 on my machine), not via Grub, otherwise it will prompt you for the bitlocker recovery key on boot (details of how I removed the Windows option from Grub below)\n\nOnce everything was working, I rebooted using the USB image to mount my nfs share containing the backups and restored my data.\nA few post install tweaks:\nHibernate doesn’t work out of the box. I enabled this following the guide on Elbrar’s corner. This requires booting with the USB image again, to resize volumes to make space for the encrypted swap partition (with hindsight, the resizing would probably have been quicker if I did this before restoring my data; even so, it was only a few minutes). I didn’t follow the “Install Clevis” section, as I prefer to enter the decryption key before the machine boots. I used the Hibernate Status Button extension to enable the hibernate menu option on the desktop.\nSuspend didn’t work properly. The system would suspend, but not wake up. I eventually solved this via this Stackexchange post. You need to add intel_iommu=off to the GRUB_CMDLINE_LINUX_DEFAULT options in /etc/default/grub and then update-grub.\nI also took this opportunity to add DISABLE_OS_PROBER=true to the file, so we don’t have the option to boot to Windows from grub, which causes issues with Bitlocker, as mentioned above.\nI also had to force an update of the installed Snaps so that Firefox was at the same version as on the 20.04 system, so that it would load my profile data. Presumably this would’ve happend automatically at some point anyway."
   },
   {
     "objectID": "posts/powermon/powermon.html",
@@ -75,6 +54,34 @@
     "title": "Not so smart metering",
     "section": "",
     "text": "I plan to move the logging over to a “proper” database. Handling timestamps in Sqllite is a little fiddly. Doing some visualisation of the data is also on the list.\nCode is here"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "David Mawdsley’s Blog",
+    "section": "",
+    "text": "Ubuntu 24.04 upgrade\n\n\n\n\n\n\n\n\n\n\n\nNov 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nLocal fuel prices\n\n\n\n\n\n\n\n\n\n\n\nSep 20, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nAdding epubs to Kobo from my phone\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nTravels\n\n\n\n\n\n\n\n\n\n\n\nJun 12, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nNot so smart metering\n\n\n\n\n\n\nPython\n\n\nRaspberry Pi\n\n\n\n\n\n\n\n\n\nMar 21, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nEasily deploying Shiny apps\n\n\n\n\n\n\nShiny\n\n\nR\n\n\n\n\n\n\n\n\n\nNov 24, 2022\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/kobo/kobo.html",
+    "href": "posts/kobo/kobo.html",
+    "title": "Adding epubs to Kobo from my phone",
+    "section": "",
+    "text": "I’ve got a Kobo e-reader, which is very fussy about the USB cable used to copy books to it (and even the USB port the cable is connected to). I want to be able to sideload books from, e.g. Project Gutenberg to it from my phone. The (beta) web browser that’s included with the Kobo is very basic, and I’ve struggled to get it to work with most web sites, so the obvious solution doesn’t really work.\nWith thanks to this post, I figured out a way to do this.\nEssentially you download your books using Chrome on the phone, and then use termux, which give a Linux-like environment on the phone, to run a minimal web-server whose output works with the Kobo’s browser."
+  },
+  {
+    "objectID": "posts/kobo/kobo.html#setup",
+    "href": "posts/kobo/kobo.html#setup",
+    "title": "Adding epubs to Kobo from my phone",
+    "section": "Setup",
+    "text": "Setup\nAt the termux prompt: (this only needs to be done once)\ntermux-setup-storage # Gives access to the Download folder on android \npkg install python3 # Install Python"
+  },
+  {
+    "objectID": "posts/kobo/kobo.html#to-use",
+    "href": "posts/kobo/kobo.html#to-use",
+    "title": "Adding epubs to Kobo from my phone",
+    "section": "To use",
+    "text": "To use\nEnable tethering on the phone (I also found I had to disable the VPN running on the phone)\nAt the termux prompt:\nifconfig # Note the ip associated with wlan0\ncd ~/storage/downloads # Assuming this is where the book is\npython -m http.server 8080\nOn the Kobo, connect to the phone’s hotspot, open the browser (more, beta features), and navigate to http://&lt;phone’s ip&gt;:8080 This gives a very basic directory listing, which works OK on the Kobo"
   },
   {
     "objectID": "posts/fuelprice/fuelprice.html",
