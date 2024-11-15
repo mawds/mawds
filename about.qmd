@@ -17,6 +17,8 @@ comments: false
 
 I am a self employed data scientist/statistician/software engineer. When I'm not working I enjoy bouldering, swimming, cycling and hiking.  I live in Bristol.
 
+You can contact me by email: `david` @ `mawds.co.uk` 
+
 You can see my full career history on [Linkedin](https://www.linkedin.com/in/david-mawdsley-7477873/), but briefly:
 
 ## Experience
