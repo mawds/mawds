@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: docs
+  resources: "DavidMawdsley_CV.pdf"
 
 website:
   title: "David Mawdsley"
@@ -23,6 +24,8 @@ website:
 comments:
   giscus: 
     repo: mawds/mawds
+execute:
+  freeze: auto
   
     
 resources:
