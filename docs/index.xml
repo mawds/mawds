@@ -70,6 +70,22 @@
   <pubDate>Thu, 19 Sep 2024 23:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Travels</title>
+  <link>https://www.mawds.co.uk/posts/travels/travels.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I’m taking a few months career break to go travelling, which I plan to blog (hopefully more regularly than I manage here!) at <a href="https://travel.mawds.co.uk/index.php/europe-2023/">https://travel.mawds.co.uk/index.php/europe-2023/</a>. This is running on Wordpress, which is a lot easier to update on a phone than this Quarto based site.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.mawds.co.uk/posts/travels/travels.html</guid>
+  <pubDate>Sun, 11 Jun 2023 23:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Adding epubs to Kobo from my phone</title>
   <link>https://www.mawds.co.uk/posts/kobo/kobo.html</link>
   <description><![CDATA[ 
@@ -100,22 +116,6 @@ python -m http.server 8080</code></pre>
 
  ]]></description>
   <guid>https://www.mawds.co.uk/posts/kobo/kobo.html</guid>
-  <pubDate>Sun, 11 Jun 2023 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Travels</title>
-  <link>https://www.mawds.co.uk/posts/travels/travels.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>I’m taking a few months career break to go travelling, which I plan to blog (hopefully more regularly than I manage here!) at <a href="https://travel.mawds.co.uk/index.php/europe-2023/">https://travel.mawds.co.uk/index.php/europe-2023/</a>. This is running on Wordpress, which is a lot easier to update on a phone than this Quarto based site.</p>
-
-
-
- ]]></description>
-  <guid>https://www.mawds.co.uk/posts/travels/travels.html</guid>
   <pubDate>Sun, 11 Jun 2023 23:00:00 GMT</pubDate>
 </item>
 <item>

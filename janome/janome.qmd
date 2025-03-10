@@ -1,0 +1,205 @@
+---
+title: "Reverse engineering Janome embroidery cards"
+date: 2025-02-26 
+search: false
+---
+
+```{r, echo=FALSE, include=FALSE}
+Sys.setenv(RETICULATE_PYTHON = "/home/david/python_projects/pyembroidery/venv/bin/python")
+```
+
+
+
+```{python, echo=FALSE, include=FALSE}
+
+import sys
+
+MODULE_FULL_PATH = '/home/david/python_projects/pyembroidery'
+
+sys.path.insert(1, MODULE_FULL_PATH)
+import pyembroidery
+import pandas as pd
+import plotly.express as px
+from  pyembroidery.JanomeCard import JanomeCard, PATTERNS
+```
+
+I recently bought a [Janome Memory Craft 8000](https://www.embroidery.com/Janome-MC-8000) off eBay for a sewing project.  The machine dates from the early 90s, but was top-of-the-range when it was released.  It was also (one of?) the first machines to embroider designs off a memory card.  The vendor was also selling a "Scan n Sew" unit.  This is a standalone device that consists of a monochrome hand scanner integrated with a roughly laptop sized box.  The device allows you to scan a design and convert it to an embroidery file, which is written to a special memory card. 
+
+I've been trying to figure out the format of the data on the memory cards, with a view to writing my own designs to a custom card (TLDR - I've not got that far).
+
+I found an (abandoned?) attempt at reading the cards of the newer 9000 model on [hackaday](https://hackaday.io/project/188230-reverse-engineering-the-janome-memory-cards) (these cards are 512kb capacity, mine, I eventually figured out) are 128kb)
+
+
+### Other tools
+
+There were 3rd party devices to allow users to write their own designs to a custom card.  I've been able to find out very little about these; they date from around the turn of the century (that make's me feel old), and there's little information about them online:
+
+* [Amazing Box II from Amazing Designs](https://web.archive.org/web/20060321183738/http://www.amazingdesigns.com/AmazingStore/software/pdf/ab2.pdf) (archive.org link) 
+* [Echidna Easy Writer](https://web.archive.org/web/20030402090610/http://www.ggcreations.com.au/althea/software/tfr/easywrit.html) (archive.org link) (found via https://sewing.patternreview.com/SewingDiscussions/topic/4921)
+* [PES2Card](http://www.knitandsew.demon.nl/p2c/pes2card3.htm) 
+* [Multi converter](http://www.stitch-sew.com/old_site_ver1_5/MultiConverter/MultiConverter.html)
+
+AFAIKT they all use a custom box which appears as a serial port on the PC, and use proprietary software to send designs to the card.  
+
+I've split this write up into 2 sections; getting the data off the cards, and decoding the "file" format used on the cards.
+
+## Getting data off the cards
+
+### Physical format
+
+The machine came with a single (read only card), which contains the alphabet in various fonts for embroidering words. When new the machine would've come with an additional card containing designs, but I didn't get this.   Various cards come up for sale on eBay containing different designs. I've bought a few of these.
+
+The cards look like PCMCIA cards, except they have only a single row of 34 connectors, vs 2x34 on a PCMCIA card.   The Scan n Sew card has the same form factor, but also contains a button cell battery to maintain the memory.  This card has (according to the label) a 32 kb rom and 96 kb ram(!).    The Scan n Sew allows you to store 4 designs, each of up to 4 colours.   This contrasts with the ROM cards, which have more designs and more colours per design.
+
+
+Some searching for 34 pin memory eventually led me to the [retrocomputing forum](https://retrocomputingforum.com/t/8-bit-sram-memory-card-pin-assignment/3636) where someone provided a potential pin-out for a similar looking card, albeit with a lower capacity.
+
+The Scan N Sew contains a [D70320GJ-8](https://www.alldatasheet.com/datasheet-pdf/pdf/7000/NEC/UPD70320GJ-8-5BG.html) microcontroller.  Checking the continuity from its address and data lines to the connector in the scan n sew confirmed the pin assignments were correct, and gave me the pins for the A15 and A16 (A17 was also connected on the scan n sew, but isn't used - perhaps a larger capacity card was planned)
+
+### Extracting the data
+
+I planned to try and read the data off the card by wiring up an old PCMCIA connector.  Looking at the connector on the machine, it looks like the pins are offset from the centre, so I was hoping that this would work.  After much soldering I concluded that the pins weren't making contact, so gave up on that approach.  (With hindsight I should've just soldered the two ground pins and checked for continuity between them via the card)
+
+<pic>
+
+I then decided to solder directly to the back of the connector on a dismantled card.  I should've used thinner wire :-(
+
+<pic>
+
+### Reading the data 
+
+A [link](http://www.knitandsew.demon.nl/p2c/jancard.htm) on the PES2Card site helpfully listed the chip numbers in each of the after market cards.  These are all 29F040B.    Searching for this led me to a [post on the Arduino forum](https://forum.arduino.cc/t/solved-flash-memory-programmer-am29f040b/189850), to make a programmable cartridge for a gameboy.
+
+Using some of the code from this thread, [and the repo for the OP's code](https://github.com/warber0x/FMPUNO), I built a circuit using a couple of shift 8 bit shift registers (plus an additional GPIO line for A16) to read the data from the card.
+
+(stuff here about shorts )
+
+
+
+I then learned that [these](https://warwickts.com/855/923660-28-28pin-Wide-SOIC-Alloy-Clip) exist.  This simplified things greatly(!)
+
+
+
+## Decoding the ROM
+
+The research I'd done suggested that early Janome machines use the SEW file format, which was succeeded by their JEF format.  The [pyembroidery](https://github.com/EmbroidePy/pyembroidery) library has a reader for both of these file types.  I could find out little beyond that about the format until I found a page for an (abandoned?) [KDE embroidery project](https://community.kde.org/Projects/Liberty/File_Formats/Janome_Embroidery_Format) which had some information on the specification of both file types.
+
+I was expecting to find chunks of memory each containing a sew file, and some sort of FAT to point the machine to the start address of each design.  Sadly this proved not to be the case. 
+
+```{python, echo=FALSE, include=FALSE}
+example_card_file = "/home/david/python_projects/pyembroidery/cards/card_8.bin"
+example_card = JanomeCard(romfile=example_card_file)
+```
+
+* First 0x2000 blank
+* Reading as a sew file from here gave me *something* (helpful bug in PyEmbroidery doesn't detect stop characters)
+* Getting bits of designs out
+
+This means we know the stitch data is stored in the same format (2s complement.  1 byte for x, 1 byte for y, 2 byte control character for move (instead of stitch)). Established we need to start on an even byte otherwise design goes wrong on a control character.
+
+I then looked at what we got if we treat everything as a stitch. This is shown below.
+
+```{python}
+stitches = example_card.stitches_for_everything()
+
+stitches_df =pd.DataFrame(stitches, columns=["address", "x", "y", "dx", "dy"]).set_index("address")
+stitches_df["tooltip"]=[hex(i) for i in stitches_df.index.values ]
+stitch_mask = [(addr >= 0x6000 and addr <= 0xf714) or (addr >= 0x13000 and addr <= 0x1f19e) for addr in stitches_df.index.values]
+stitches_df["stitch_data"]= stitch_mask
+```
+
+
+```{python}
+fig = px.line(x="x", y="y", hover_data="tooltip", data_frame=stitches_df, color="stitch_data", line_group="stitch_data", )
+fig.update_yaxes(
+    scaleanchor = "x",
+    scaleratio = 1,
+  )
+fig.show()
+```
+
+
+The stitch data is quite hard to see amongst all the other stuff on the card. It's highlighted in red on the (zoomable) plot above.   One lot of data is in the bottom 64k of the chip, the other in the upper.
+
+There's a separate set of stitches for each colour in each design, but no obvious delimiter between designs and colours (the stuff between designs corresponds to move commands to move the needle to the right place to start the next colour.  As the biggest move is 12.7mm multiple moves are sometimes needed to get to the right place).
+
+### An Easter egg
+
+I noticed what I thought was an Easter egg in the data, at the end of the first bank of stitches:
+
+```{python}
+easter_egg_mask = [addr >= 0x1f1a2 and addr <= 0x1f8fe for addr in stitches_df.index.values ]
+easter_egg_df = stitches_df[easter_egg_mask]
+
+fig2 = px.line(x="x", y="y", hover_data="tooltip", data_frame=easter_egg_df)
+fig2.update_yaxes(
+    scaleanchor = "x",
+    scaleratio = 1,
+  )
+```
+
+Unfortunately looking at the other bank of stitches, and data on other cards showed that there was often "junk" at the end of the stitch data (and elsewhere on the cards).  Presumably whatever method was used to make the cards didn't wipe the image used by the previous card, leading to these "ghosts"
+
+### Towards a FAT
+
+I looked at the  start address of each colour per pattern ("chunk"), and looked for these addresses elsewhere on the card.  I located these addresses at 0xFA00 (and 0x1FA00), stored little endian.  The addresses in the upper memory bank just use 0x10000 as a mask.  There were also some "dummy" values in this area, that didn't correspond to a memory address. I identified more likely addresses at 0XFC00 (and 0x1FC00).  These appear correspond to the end address of each chunk of stitches
+
+I read these in pairwise (i.e. 0xFA00 and 0xFC00, 0xFA02 and 0xFC02), and kept the chunk if both start and end addresses are plausible (e.g. different, neither is FF FF etc).  This isn't perfect; there a few false positives, but it mostly works to identify the chunks of stitches refferred to on the card (and removes the easter eggs/ghost chunks)
+
+These can be read as a pattern using a lightly modified version of the SEW reader in Pyembroidery, which allows them to be saved as an svg (or any of the other embroidery formats pyembroidery supports).
+
+This doesn't, however, allow us to distinguish between the patterns on a card, or to establish what colour is associated with each chunk.
+
+```{python}
+pattern = example_card.make_pattern_from_chunks()
+pattern.write("example_pattern.svg")
+```
+
+![Designs from the card](example_pattern.svg)
+
+
+```{python}
+balloon_chunks = PATTERNS["8"]["balloons"]
+balloon = example_card.make_pattern_from_chunks(chunk_indices=balloon_chunks)
+balloon.write("balloons.svg")
+```
+
+Or, by working out which chunk belongs to each pattern, just extract a single pattern:
+
+![A single design](balloons.svg)
+
+
+
+
+
+
+
+Confirmed data is OK.
+
+
+### The other stuff on the card
+
+Treat as bitmaps of various widths
+
+
+
+## Writing data
+
+Fairly happy I could use the Gameboy writer to write an image.   If the start/end chunk address work is correct could probably overwrite bits of existing ROM image with new stitches (would need to have the same or fewer colours as the design being overwritten, as haven't figured out how to link chunk to design.
+
+## Making a new card
+
+Really not sure how to start with this :-(  The card connector obsolete. I'm not sure whether it was ever used on anything besides these machines.  This was presumably also an issue for the people behind the Echidna converter: ["you need to supply us an exchange memory card to suit the Memory Craft 8000. This card can be any MC8000 card that you already own.For example you may have a card that you don™t like or are never likely to use."](https://web.archive.org/web/20030402090610/http://www.ggcreations.com.au/althea/software/tfr/easywrit.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
