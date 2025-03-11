@@ -23,9 +23,11 @@ import plotly.express as px
 from  pyembroidery.JanomeCard import JanomeCard, PATTERNS
 ```
 
-I recently bought a [Janome Memory Craft 8000](https://www.embroidery.com/Janome-MC-8000) off eBay for a sewing project.  The machine dates from the early 90s, but was top-of-the-range when it was released.  It was also (one of?) the first machines to embroider designs off a memory card.  The vendor was also selling a "Scan n Sew" unit.  This is a standalone device that consists of a monochrome hand scanner integrated with a roughly laptop sized box.  The device allows you to scan a design and convert it to an embroidery file, which is written to a special memory card. 
+I recently bought a [Janome Memory Craft 8000](https://www.embroidery.com/Janome-MC-8000) off eBay for a sewing project.  The machine dates [from the early 90s, but was top-of-the-range when it was released](https://archive.org/details/threads-magazine/Threads%20Magazine%2038%20-%20December%201991%20January%201992/page/24/mode/2up).  It was also (one of?) the first machines to embroider designs off a memory card.  
 
-I've been trying to figure out the format of the data on the memory cards, with a view to writing my own designs to a custom card (TLDR - I've not got that far).
+The vendor was also selling a ["Scan n Sew"](https://archive.org/details/threads-magazine/Threads%20Magazine%2045%20-%20February%20March%201993/page/22/mode/2up?q=janome+memorycraft+8000) unit.  This is a standalone device that consists of a monochrome hand scanner integrated with a roughly laptop sized box.  The device allows you to [scan a design and automatically convert it to an embroidery file, which is written to a special memory card](https://archive.org/details/threads-magazine/Threads%20Magazine%2045%20-%20February%20March%201993/page/72/mode/2up?q=janome+memorycraft+8000). 
+
+I've been trying to figure out the format of the data on the memory cards, with a view to writing my own designs to a custom card (TLDR - I've not got that far).  The [pyembroidery library](https://github.com/EmbroidePy/pyembroidery), which is used by InkStitch can read the .sew files which (I thought) my machine used, and write .jef files (which is the format used by newer Janome machines, which has some similarities with .sew files).
 
 I found an (abandoned?) attempt at reading the cards of the newer 9000 model on [hackaday](https://hackaday.io/project/188230-reverse-engineering-the-janome-memory-cards) (these cards are 512kb capacity, mine, I eventually figured out) are 128kb)
 
@@ -41,7 +43,7 @@ There were 3rd party devices to allow users to write their own designs to a cust
 
 AFAIKT they all use a custom box which appears as a serial port on the PC, and use proprietary software to send designs to the card.  
 
-I've split this write up into 2 sections; getting the data off the cards, and decoding the "file" format used on the cards.
+I've split this write up into 4 sections; getting the data off the cards, decoding the design format used on the cards, writing data and making a new rewritable card.
 
 ## Getting data off the cards
 
@@ -51,20 +53,58 @@ The machine came with a single (read only card), which contains the alphabet in 
 
 The cards look like PCMCIA cards, except they have only a single row of 34 connectors, vs 2x34 on a PCMCIA card.   The Scan n Sew card has the same form factor, but also contains a button cell battery to maintain the memory.  This card has (according to the label) a 32 kb rom and 96 kb ram(!).    The Scan n Sew allows you to store 4 designs, each of up to 4 colours.   This contrasts with the ROM cards, which have more designs and more colours per design.
 
-
 Some searching for 34 pin memory eventually led me to the [retrocomputing forum](https://retrocomputingforum.com/t/8-bit-sram-memory-card-pin-assignment/3636) where someone provided a potential pin-out for a similar looking card, albeit with a lower capacity.
 
 The Scan N Sew contains a [D70320GJ-8](https://www.alldatasheet.com/datasheet-pdf/pdf/7000/NEC/UPD70320GJ-8-5BG.html) microcontroller.  Checking the continuity from its address and data lines to the connector in the scan n sew confirmed the pin assignments were correct, and gave me the pins for the A15 and A16 (A17 was also connected on the scan n sew, but isn't used - perhaps a larger capacity card was planned)
 
+::: {.callout-note collapse="true"}
+## Connector pinout
+1. 5V
+2. A14
+3. A12
+4. EC??
+5. A7
+6. A13
+7. NC
+8. NC
+9. A6
+10. A8
+11. A5
+12. A9
+13. A4
+14. A11
+15. A3
+16. OE(?)
+17. A2
+18. A10
+19. A1
+20. ?CS??
+21. A17
+22. A15
+23. A16
+24. A0
+25. D7
+26. D0
+27. D6
+28. D1
+29. D5
+30. D2
+31. D4
+32. D3
+33. GND
+34. GND
+
+:::
+
 ### Extracting the data
 
-I planned to try and read the data off the card by wiring up an old PCMCIA connector.  Looking at the connector on the machine, it looks like the pins are offset from the centre, so I was hoping that this would work.  After much soldering I concluded that the pins weren't making contact, so gave up on that approach.  (With hindsight I should've just soldered the two ground pins and checked for continuity between them via the card)
+I planned to try and read the data off the card by wiring up an old PCMCIA connector (lightly modified with a hacksaw).  Looking at the connector on the machine, it looks like the pins are offset from the centre, so I was hoping that this would work.  After much soldering I concluded that the pins weren't making contact, so gave up on that approach.  (With hindsight I should've just soldered the two ground pins and checked for continuity between them via the card)
 
-<pic>
+![PCMCIA connector](images/pcmcia.jpg)
 
 I then decided to solder directly to the back of the connector on a dismantled card.  I should've used thinner wire :-(
 
-<pic>
+![Soldered connector](images/soldered.jpg)
 
 ### Reading the data 
 
@@ -72,17 +112,38 @@ A [link](http://www.knitandsew.demon.nl/p2c/jancard.htm) on the PES2Card site he
 
 Using some of the code from this thread, [and the repo for the OP's code](https://github.com/warber0x/FMPUNO), I built a circuit using a couple of shift 8 bit shift registers (plus an additional GPIO line for A16) to read the data from the card.
 
-(stuff here about shorts )
-
-
+This was getting something off the card, but the start of the card appeared to be blank (this turned out to be correct), and I eventually realised some areas were repeated.  This led me to suspect a short on a couple of the address lines.
 
 I then learned that [these](https://warwickts.com/855/923660-28-28pin-Wide-SOIC-Alloy-Clip) exist.  This simplified things greatly(!)
 
+Wiring up the Arduino with the clip, I was able to figure out the pinout for the ROM, and get a dump of it.  
+
+::: {.callout-note collapse="true"}
+## Chip pinout
+| pin | pin |
+|-------|-------|
+| 1. A15 | 28. +5v |
+| 2. A12 | 27. A14 |
+| 3. A7 | 26. A13 |
+| 4. A6 | 25. A8 |
+| 5. A5 | 24. A9 |
+| 6. A4 | 23. A11 |
+| 7. A3 | 22. A16 |
+| 8. A2 | 21. A10 |
+| 9. A1 | 20. CS(?) |
+| 10. A0 | 19. D7 |
+| 11. D0 | 18. D6 |
+| 12. D1 | 17. D5 |
+| 13. D2 | 16. D4 |
+| 14. GND | 15. D3 |
+
+
+:::
 
 
 ## Decoding the ROM
 
-The research I'd done suggested that early Janome machines use the SEW file format, which was succeeded by their JEF format.  The [pyembroidery](https://github.com/EmbroidePy/pyembroidery) library has a reader for both of these file types.  I could find out little beyond that about the format until I found a page for an (abandoned?) [KDE embroidery project](https://community.kde.org/Projects/Liberty/File_Formats/Janome_Embroidery_Format) which had some information on the specification of both file types.
+The research I'd done suggested that early Janome machines use the SEW file format, which was succeeded by their JEF format.  The [pyembroidery](https://github.com/EmbroidePy/pyembroidery) library has a reader for both of these file types.  I could find out little beyond that about the format, beyond the source code for pyembroidery's reader until I found a page for an (abandoned?) [KDE embroidery project](https://community.kde.org/Projects/Liberty/File_Formats/Janome_Embroidery_Format) which had some information on the specification of both file types.
 
 I was expecting to find chunks of memory each containing a sew file, and some sort of FAT to point the machine to the start address of each design.  Sadly this proved not to be the case. 
 
@@ -140,7 +201,7 @@ fig2.update_yaxes(
 
 Unfortunately looking at the other bank of stitches, and data on other cards showed that there was often "junk" at the end of the stitch data (and elsewhere on the cards).  Presumably whatever method was used to make the cards didn't wipe the image used by the previous card, leading to these "ghosts"
 
-### Towards a FAT
+### Finding a FAT
 
 I looked at the  start address of each colour per pattern ("chunk"), and looked for these addresses elsewhere on the card.  I located these addresses at 0xFA00 (and 0x1FA00), stored little endian.  The addresses in the upper memory bank just use 0x10000 as a mask.  There were also some "dummy" values in this area, that didn't correspond to a memory address. I identified more likely addresses at 0XFC00 (and 0x1FC00).  These appear correspond to the end address of each chunk of stitches
 
@@ -169,27 +230,33 @@ Or, by working out which chunk belongs to each pattern, just extract a single pa
 ![A single design](balloons.svg)
 
 
-
-
-
-
-
-Confirmed data is OK.
-
-
 ### The other stuff on the card
 
-Treat as bitmaps of various widths
+#### Device firmware?
+
+I compared the rom dumps of several of the cards in a hex editor.  All have the following features:
+
+* Nothing until 0x2000
+* Some sort of lookup just after this:
+![](images/0x2000.png)
+
+#### Bitmaps
+
+[The sew file format](https://community.kde.org/Projects/Liberty/File_Formats/Janome_Embroidery_Format), which I'd naively assumed the machine used contains bitmaps of the pattern in various resolutions (presumably for the machine to display as a preview).   I looked for bitmaps on other parts of the card to see whether this was the case.
+
+
 
 
 
 ## Writing data
 
-Fairly happy I could use the Gameboy writer to write an image.   If the start/end chunk address work is correct could probably overwrite bits of existing ROM image with new stitches (would need to have the same or fewer colours as the design being overwritten, as haven't figured out how to link chunk to design.
+Fairly happy I could use the Gameboy writer to write an image.   If the start/end chunk address work is correct could probably overwrite bits of existing ROM image with new stitches (would need to have the same or fewer colours as the design being overwritten, as haven't figured out how to link chunk to design.)
 
 ## Making a new card
 
 Really not sure how to start with this :-(  The card connector obsolete. I'm not sure whether it was ever used on anything besides these machines.  This was presumably also an issue for the people behind the Echidna converter: ["you need to supply us an exchange memory card to suit the Memory Craft 8000. This card can be any MC8000 card that you already own.For example you may have a card that you don™t like or are never likely to use."](https://web.archive.org/web/20030402090610/http://www.ggcreations.com.au/althea/software/tfr/easywrit.html)
+
+Could possibly modify a PCMCIA card (CF adaptor? But those are a little thicker).  The pins on the machine should be longer, given the ones on the PCMCIA socket were too short.  
 
 
 

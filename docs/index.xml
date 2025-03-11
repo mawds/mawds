@@ -9,7 +9,7 @@
 <link>https://www.mawds.co.uk/</link>
 <atom:link href="https://www.mawds.co.uk/index.xml" rel="self" type="application/rss+xml"/>
 <description>David Mawdsley&#39;s blog</description>
-<generator>quarto-1.5.57</generator>
+<generator>quarto-1.6.42</generator>
 <lastBuildDate>Fri, 15 Nov 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Ubuntu 24.04 upgrade</title>
