@@ -244,9 +244,21 @@ I compared the rom dumps of several of the cards in a hex editor.  All have the 
 
 [The sew file format](https://community.kde.org/Projects/Liberty/File_Formats/Janome_Embroidery_Format), which I'd naively assumed the machine used contains bitmaps of the pattern in various resolutions (presumably for the machine to display as a preview).   I looked for bitmaps on other parts of the card to see whether this was the case.
 
+There are bitmaps containing the overall design and previews for each colour on the card (and the names of the colours as bitmaps). The former are 4 bytes wide (1 bit/pixel), the latter are 3 bytes wide:
 
+![](images/designs_02_0x0962.png)
 
+![](images/colours_02_0x36ac.png)
 
+There are also images for the touch-screen's icons:
+
+![](images/controls_02_0x440d.png)
+
+And some text in Japanese:
+
+![](images/japanese_02_0x566f.png)
+
+I assume this is ghost data from a different card.
 
 ## Writing data
 
