@@ -1,6 +1,6 @@
 ---
 title: "Reverse engineering Janome embroidery cards"
-date: 2025-02-26 
+date: 2025-03-12 
 search: false
 execute:
   echo: false
