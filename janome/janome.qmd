@@ -60,6 +60,12 @@ The machine came with a single (read only card), which contains the alphabet in 
 
 The cards look like PCMCIA cards, except they have only a single row of 34 connectors, vs 2x34 on a PCMCIA card.   The Scan n Sew card has the same form factor, but also contains a button cell battery to maintain the memory.  This card has (according to the label) a 32 kb rom and 96 kb ram(!).    The Scan n Sew allows you to store 4 designs, each of up to 4 colours.   This contrasts with the ROM cards, which have more designs and more colours per design.
 
+![Card top view](images/card_top.jpg)
+
+![Card connector view](images/card_front.jpg)
+
+
+
 Some searching for 34 pin memory eventually led me to the [retrocomputing forum](https://retrocomputingforum.com/t/8-bit-sram-memory-card-pin-assignment/3636) where someone provided a potential pin-out for a similar looking card, albeit with a lower capacity.
 
 The Scan N Sew contains a [D70320GJ-8](https://www.alldatasheet.com/datasheet-pdf/pdf/7000/NEC/UPD70320GJ-8-5BG.html) microcontroller.  Checking the continuity from its address and data lines to the connector in the scan n sew confirmed the pin assignments were correct, and gave me the pins for the A15 and A16 lines (A17 was also connected on the scan n sew, but isn't used - perhaps a larger capacity card was planned)
