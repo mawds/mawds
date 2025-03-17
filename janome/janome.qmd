@@ -38,14 +38,14 @@ I found an (abandoned?) attempt at reading the cards of the newer 9000 model on 
 
 ### Other tools
 
-There were 3rd party devices to allow users to write their own designs to a custom card.  I've been able to find out very little about these; they date from around the turn of the century (that make's me feel old), and there's little information about them online:
+There were 3rd party devices to allow users to write their own designs to a custom card.  I've been able to find out very little about these; they date from around the turn of the century (that makes me feel old), and there's little information about them online:
 
 * [Amazing Box II from Amazing Designs](https://web.archive.org/web/20060321183738/http://www.amazingdesigns.com/AmazingStore/software/pdf/ab2.pdf) ([user manual](https://archive.org/details/manualzilla-id-7427101/mode/2up?)) (archive.org links) 
 * [Echidna Easy Writer](https://web.archive.org/web/20030402090610/http://www.ggcreations.com.au/althea/software/tfr/easywrit.html) (archive.org link) (found via https://sewing.patternreview.com/SewingDiscussions/topic/4921)
 * [PES2Card](http://www.knitandsew.demon.nl/p2c/pes2card3.htm) 
 * [Multi converter](http://www.stitch-sew.com/old_site_ver1_5/MultiConverter/MultiConverter.html)
 
-AFAIKT they all use a custom box connected by serial or USB to the PC, and use proprietary software to send designs to the card.  
+AFAIKT they all use a custom box connected by serial or USB to the PC, and use proprietary software to send designs to the card.  They occasionally pop up on eBay, but usually for sale in the US.
 
 Janome made a similar box for the MC 9000's (the successor to the MC 8000) called the Customizer 2000.  The Scan'n'Sew seems to be the only official way of creating your own designs for the MC 8000 though.
 
@@ -56,7 +56,7 @@ I've split this write-up into 4 sections; getting the data off the cards, decodi
 
 ### Physical format
 
-The machine came with a single (read only card), which contains the alphabet in various fonts for embroidering words. When new the machine would've come with an additional card containing designs, but I didn't get this.   Various cards come up for sale on eBay containing different designs. I've bought a few of these.
+The machine came with a single (read only card), which contains the alphabet in various fonts for embroidering words. When new the machine would've come with an additional card containing designs, but I didn't get this.   Various cards come up for sale on eBay containing different designs. I've bought a few of these, including the design card that would've come with the machine.
 
 The cards look like PCMCIA cards, except they have only a single row of 34 connectors, vs 2x34 on a PCMCIA card.   The Scan n Sew card has the same form factor, but also contains a button cell battery to maintain the memory.  This card has (according to the label) a 32 kb rom and 96 kb ram(!).    The Scan n Sew allows you to store 4 designs, each of up to 4 colours.   This contrasts with the ROM cards, which have more designs and more colours per design.
 
@@ -191,7 +191,7 @@ fig.update_yaxes(
 ```
 
 
-The stitch data is quite hard to see amongst all the other stuff on the card. It's highlighted in red on the (zoomable) plot above.   One lot of data is in the bottom 64k of the chip, the other in the upper.
+The stitch data is quite hard to see amongst all the other stuff on the card. It's highlighted in red on the (zoomable) plot above.   One lot of data is in the bottom 64k of the chip, the other in the upper.  
 
 There's a separate set of stitches for each colour in each design, but no obvious delimiter between designs and colours (the stuff between designs corresponds to move commands to move the needle to the right place to start the next colour.  As the biggest move is 12.7mm multiple moves are sometimes needed to get to the right place).
 
@@ -214,7 +214,7 @@ Unfortunately looking at the other bank of stitches, and data on other cards sho
 
 ### Finding a FAT
 
-I looked at the  start address of each colour per pattern ("chunk"), and looked for these addresses elsewhere on the card.  I located these addresses at 0xFA00 (and 0x1FA00), stored little endian.  The addresses in the upper memory bank just use 0x10000 as a mask.  There were also some "dummy" values in this area, that didn't correspond to a memory address. I identified more likely addresses at 0XFC00 (and 0x1FC00).  These appear correspond to the end address of each chunk of stitches
+I located the  start address of each colour per pattern ("chunk"), and looked for these addresses elsewhere on the card.  I located these addresses at 0xFA00 (and 0x1FA00), stored little endian.  The addresses in the upper memory bank just use 0x10000 as a mask.  There were also some "dummy" values in this area, that didn't correspond to a memory address. I identified more likely addresses at 0XFC00 (and 0x1FC00).  These appear correspond to the end address of each chunk of stitches
 
 I read these in pairwise (i.e. 0xFA00 and 0xFC00, 0xFA02 and 0xFC02), and kept the chunk if both start and end addresses are plausible (e.g. different, neither is FF FF etc).  This isn't perfect; there a few false positives, but it mostly works to identify the chunks of stitches referred to on the card (and removes the Easter eggs/ghost chunks)
 
@@ -307,7 +307,7 @@ I've not got much further than this.  0x12978 seems to have the number of colour
 
 I'm fairly happy I could modify the gameboy write code to write an image to a suitable chip, such as the 29F010B. 
 
-I've successfully found the start and end addresses of each chunk, it should be possible to overwrite bits of an existing ROM image with the new stitches, and update the addresses to the new regions (and optionally update the icon bitmaps for the design).  The new design would need to have the same or fewer colours than the design being overwritten, as I've not yet figured out how to link each chunk to a design.
+I've successfully found the start and end addresses of each chunk, it should be possible to overwrite bits of an existing ROM image with the new stitches, and update the addresses to the new regions (and optionally update the icon bitmaps for the design).  The new design would need to have the same or fewer colours than the design being overwritten, as I've not yet figured out how to link each chunk to a design.  In principle, this _should_ allow custom designs to be written, using a modified version of PyEmbroidery's JEF writer functionality (the part containing the stitches is basically the same).
 
 ## Making a new card
 
@@ -323,10 +323,10 @@ Feel free to get in touch if you've any suggestions.
 
 ### Code
 
-The sketch to read a ROM is at https://github.com/mawds/read_mc8000_rom/
+The sketch to read a ROM is at [https://github.com/mawds/read_mc8000_rom/](https://github.com/mawds/read_mc8000_rom/)
 
 The code I developed to look at the ROM, building on pyembroidery is in the mc8000 branch
-of my fork of their repository: https://github.com/mawds/pyembroidery/tree/mc8000  
+of my fork of their repository: [https://github.com/mawds/pyembroidery/tree/mc8000](https://github.com/mawds/pyembroidery/tree/mc8000)
 This defines a `JanomeCard` class which allows you to read the stitch offsets from a card dump, output (selected) chunks, etc. 
 It's very much a work in progress.
 
