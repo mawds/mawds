@@ -170,6 +170,7 @@ The first 0x2000 of all the cards I read is blank.  I tried reading the dump in 
 This means we know the stitch data is stored in the same format as the sew files (2s complement.  1 byte for x, 1 byte for y, 2 byte control characters, for, e.g. move.) I worked out that we need to start on an even byte otherwise design goes wrong on a control character.
 
 I then looked at what we got if we treat everything as a stitch in the entire dump, to try and figure out how the data are arranged. This is shown below.
+(this doesn't display properly on mobile)
 
 ```{python}
 stitches = example_card.stitches_for_everything()
@@ -330,6 +331,9 @@ This defines a `JanomeCard` class which allows you to read the stitch offsets fr
 It's very much a work in progress.
 
 
+### Acknowlegements
+
+Thanks to Roger for the encouragement!
 
 
 
