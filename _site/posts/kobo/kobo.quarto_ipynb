@@ -1,0 +1,65 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Adding epubs to Kobo from my phone\"\n",
+        "date: 2023-06-12\n",
+        "    \n",
+        "---\n",
+        "\n",
+        "\n",
+        "\n",
+        "I've got a Kobo e-reader, which is very fussy about the USB cable used to copy books to it (and even the USB port the cable is connected to).\n",
+        "I want to be able to sideload books from, e.g. [Project Gutenberg](https://www.gutenberg.org) to it from my phone.  The (beta) web browser that's included with \n",
+        "the Kobo is _very_ basic, and I've struggled to get it to work with most web sites, so the obvious solution doesn't really work.\n",
+        "\n",
+        "With thanks to [this post](https://medium.com/techtofreedom/this-is-how-i-set-up-an-http-server-on-my-android-phone-1fed20e4f0c8), I figured out a way to do\n",
+        "this.\n",
+        "\n",
+        "Essentially you download your books using Chrome on the phone, and then use [termux](https://termux.com/), which give a Linux-like environment on the phone, to run a minimal web-server whose output works with the Kobo's browser.\n",
+        "\n",
+        "## Setup\n",
+        "\n",
+        "At the termux prompt: (this only needs to be done once)\n",
+        "\n",
+        "\n",
+        "```{bash}\n",
+        "termux-setup-storage # Gives access to the Download folder on android \n",
+        "pkg install python3 # Install Python\n",
+        "```\n",
+        "\n",
+        "\n",
+        "## To use\n",
+        "\n",
+        "Enable tethering on the phone (I also found I had to disable the VPN running on the phone)\n",
+        "\n",
+        "At the termux prompt:\n",
+        "\n",
+        "\n",
+        "```{bash}\n",
+        "ifconfig # Note the ip associated with wlan0\n",
+        "cd ~/storage/downloads # Assuming this is where the book is\n",
+        "python -m http.server 8080\n",
+        "```\n",
+        "\n",
+        "\n",
+        "On the Kobo, connect to the phone's hotspot, open the browser (more, beta features),\n",
+        "and navigate to http://<phone's ip>:8080  This gives a very basic directory listing, which works OK on the Kobo\n"
+      ],
+      "id": "0e0b618c"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/usr/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

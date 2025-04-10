@@ -1,0 +1,11 @@
+---
+title: "Reverse engineering Janome embroidery cards"
+date: 2025-03-17
+---
+
+I recently went down a bit of a rabbit hole trying to reverse engineer
+the embroidery cards for a 1990s Janome Memory Craft 8000 sewing machine I bought.
+
+I'm hoping to be able to write my own designs to a card, but haven't got that far
+yet.  As it's rather a long write up, and still a work in progress
+[I've put the write up on a separate page](../../janome/janome.qmd).
