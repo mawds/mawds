@@ -310,7 +310,7 @@ I'm fairly happy I could modify the gameboy write code to write an image to a su
 I've successfully found the start and end addresses of each chunk, it should be possible to overwrite bits of an existing ROM image with the new stitches, and update the addresses to the new regions (and optionally update the icon bitmaps for the design).  The new design would need to have the same or fewer colours than the design being overwritten, as I've not yet figured out how to link each chunk to a design.  In principle, this _should_ allow custom designs to be written, using a modified version of PyEmbroidery's JEF writer functionality (the part containing the stitches is basically the same).
 
 I've held off trying to get any further than this until I find a way of making a homebrew card.  
-jj
+
 ## Making a new card
 
 I'm really not sure how to start with this :-(  The card connector obsolete. I'm not sure whether it was ever used on anything besides these machines.  This was presumably also an issue for the people behind the Echidna converter: ["you need to supply us an exchange memory card to suit the Memory Craft 8000. This card can be any MC8000 card that you already own.For example you may have a card that you don™t like or are never likely to use."](https://web.archive.org/web/20030402090610/http://www.ggcreations.com.au/althea/software/tfr/easywrit.html)
