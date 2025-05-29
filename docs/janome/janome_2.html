@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-05-29">
 
-<title>David Mawdsley’s Blog – David Mawdsley</title>
+<title>Reverse engineering Janome embroidery cards (part 2) – David Mawdsley</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4c85d6e1c36bd9414fe7f8ad42f7807f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-4c85d6e1c36bd9414fe7f8ad42f7807f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,69 +67,13 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="David Mawdsley" href="index.xml" data-external="1"><meta property="og:title" content="David Mawdsley’s Blog – David Mawdsley">
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Reverse engineering Janome embroidery cards (part 2) – David Mawdsley">
+<meta property="og:description" content="David Mawdsley’s blog">
+<meta property="og:image" content="https://www.mawds.co.uk/janome/images/connection.jpg">
 <meta property="og:site_name" content="David Mawdsley">
 </head>
 
@@ -141,7 +84,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">David Mawdsley</span>
     </a>
   </div>
@@ -152,17 +95,17 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -174,25 +117,38 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmFzcGJlcnJ5JTIwUGk=">Raspberry Pi <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2hpbnk=">Shiny <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#alternative-connectors" id="toc-alternative-connectors" class="nav-link active" data-scroll-target="#alternative-connectors">Alternative connectors</a></li>
+  <li><a href="#emulating-the-rom" id="toc-emulating-the-rom" class="nav-link" data-scroll-target="#emulating-the-rom">Emulating the ROM</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">David Mawdsley’s Blog</h1>
+<h1 class="title">Reverse engineering Janome embroidery cards (part 2)</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 29, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -202,233 +158,32 @@ window.Quarto = {
 </header>
 
 
+<p>(continued from <a href="janome.html">part 1</a> )</p>
+<section id="alternative-connectors" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-connectors">Alternative connectors</h2>
+<p>I found <a href="https://vi.aliexpress.com/item/1005006181706880.html">an alternative connector on AliExpress</a> that looked like it might work.</p>
+<p>Putting this in the 3d printed card, and wiring up 5v and gnd, I was able to make contact with the connector:</p>
+<p><img src="images/connection.jpg" class="img-fluid"></p>
+</section>
+<section id="emulating-the-rom" class="level2">
+<h2 class="anchored" data-anchor-id="emulating-the-rom">Emulating the ROM</h2>
+<p>I found a project to <a href="https://github.com/robinhedwards/A8PicoCart">emulate Atari 8-bit console roms</a>, using a Pi Pico. I wondered if something like this might work to emulate the rom cards. The Atari project appears as a USB drive when plugged into the PC, making it easy to copy ROMS over. When plugged into the console it appears as the rom. It uses an aftermarket <a href="https://vi.aliexpress.com/item/1005004148913144.html">purple pico</a>, which has more GPIO pins than the official board.</p>
+<p>Searching around I found a couple of similar projects:</p>
+<ul>
+<li><a href="https://github.com/wickerwaka/PicoROM">wickerwaka/PicoROM</a> - this uses a custom board to emulate 8 bit ROMS. ROMS can be sent over USB using a command line tool.</li>
+<li><a href="https://github.com/nickbild/picoROM">nickbild/picoROM</a> - this uses a standard board, and is much simpler. It’s designed to emulate a 32k ROM; this is included in the code at compile time.</li>
+</ul>
+<p>I modified nickbild’s picoROM to work with the 128k ROM images the sewing machine uses. I tested this worked by reading back data from the Pico using the circuit I built to read the ROM cards.</p>
+<p>The Janome uses 5v, whereas the Pico uses 3.3v. I tried building a circuit using level shifters, but couldn’t get this to work (I think due to cheap breadboard). The sewing machine either failed to recognise the card at all, failed to start (i.e.&nbsp;I got a blank screen), or the embroidery arm started moving randomly when the machine was turned on.</p>
+<p>I decided to try running the Pico directly off the machine, as they’re <a href="https://hackaday.com/2023/04/05/rp2040-and-5v-logic-best-friends-this-fx9000p-confirms/">supposed to be 5v tolerant</a> This wasn’t detected by the machine at all, though the Pico was getting power, and some of the address lines were high.</p>
+<p>I’d assumed that the machine wouldn’t try to access the card until the embroidery button was pressed. Presumably this isn’t the case, and it tries to access it as soon as the machine is turned on (which would explain the failing to start, random movements, etc). My hunch is that it’s trying to read the embroidery card before the Pico has started running its code.</p>
+<p>The wkerwake/PicoROM has a reset pin that can be toggled when the Pico is ready, to <a href="https://github.com/wickerwaka/PicoROM/?tab=readme-ov-file#standalone">reboot the host machine without powering off to deal with this</a>. I don’t have a way of doing this, since it’s a hardware switch on the sewing machine. He suggests it takes ~8ms to copy the rom from flash + the time for the Pico to boot. <a href="https://forums.raspberrypi.com/viewtopic.php?t=303331#p1816483">I found a forum post that suggested 18ms for boot time</a>.</p>
+<p>Tim suggested just writing the ROM image to a flash chip, and using this directly. One of the pages on the <a href="http://www.knitandsew.demon.nl/p2c/pes2card3.htm">PES2Card</a> page <a href="http://www.knitandsew.demon.nl/p2c/jancard.htm">lists the chips used in the various official aftermarket cards that used to be available</a>. I’ve ordered <a href="https://www.ebay.co.uk/itm/388232058408">a chip to use</a>, which I plan to program using an Arduino and <a href="https://github.com/warber0x/FMPUNO">this code</a>. This was written to write Gameboy ROM images, and uses the same chip, so fingers crossed that will work.</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1748473200000" data-listing-file-modified-sort="1748513060245" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="36">
-<div class="thumbnail">
-<p><a href="./posts/janome/janome_2.html" class="no-external"></a></p><a href="./posts/janome/janome_2.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/janome/janome_2.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/janome/janome_2.html" class="no-external">Reverse engineering Janome embroidery cards (part 2)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/janome/janome_2.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/janome/janome_2.html" class="no-external">My attempts to reverse engineer an old sewing machine’s embroidery function continue. The original post was getting a bit long (as is the project…). This is an update…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/janome/janome_2.html" class="no-external">
-<div class="listing-date">
-May 29, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1742169600000" data-listing-file-modified-sort="1742230778502" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="66">
-<div class="thumbnail">
-<p><a href="./posts/janome/janome.html" class="no-external"></a></p><a href="./posts/janome/janome.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/janome/janome.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/janome/janome.html" class="no-external">Reverse engineering Janome embroidery cards</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/janome/janome.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/janome/janome.html" class="no-external">I recently went down a bit of a rabbit hole trying to reverse engineer the embroidery cards for a 1990s Janome Memory Craft 8000 sewing machine I bought.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/janome/janome.html" class="no-external">
-<div class="listing-date">
-Mar 17, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1731628800000" data-listing-file-modified-sort="1740589752169" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="659">
-<div class="thumbnail">
-<p><a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external"></a></p><a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external">Ubuntu 24.04 upgrade</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external">I recently had to reinstall Ubuntu on my ageing Thinkpad X260, after the upgrade from 22.04 to 24.04 went horribly wrong.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/ubuntu_reinstall/ubuntu_reinstall.html" class="no-external">
-<div class="listing-date">
-Nov 15, 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1726786800000" data-listing-file-modified-sort="1740589752168" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25">
-<div class="thumbnail">
-<p><a href="./posts/fuelprice/fuelprice.html" class="no-external"></a></p><a href="./posts/fuelprice/fuelprice.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/fuelprice/fuelprice.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/fuelprice/fuelprice.html" class="no-external">Local fuel prices</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/fuelprice/fuelprice.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/fuelprice/fuelprice.html" class="no-external">I’ve recently launched a new site localfuelprices.co.uk to display the cost of petrol and diesel nearby petrol stations.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/fuelprice/fuelprice.html" class="no-external">
-<div class="listing-date">
-Sep 20, 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1686524400000" data-listing-file-modified-sort="1740589752168" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="46">
-<div class="thumbnail">
-<p><a href="./posts/travels/travels.html" class="no-external"></a></p><a href="./posts/travels/travels.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/travels/travels.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/travels/travels.html" class="no-external">Travels</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/travels/travels.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/travels/travels.html" class="no-external">I’m taking a few months career break to go travelling, which I plan to blog (hopefully more regularly than I manage here!) at https://travel.mawds.co.uk/index.php/europe-2023/…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/travels/travels.html" class="no-external">
-<div class="listing-date">
-Jun 12, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1686524400000" data-listing-file-modified-sort="1740589752168" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="218">
-<div class="thumbnail">
-<p><a href="./posts/kobo/kobo.html" class="no-external"></a></p><a href="./posts/kobo/kobo.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/kobo/kobo.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/kobo/kobo.html" class="no-external">Adding epubs to Kobo from my phone</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/kobo/kobo.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/kobo/kobo.html" class="no-external">I’ve got a Kobo e-reader, which is very fussy about the USB cable used to copy books to it (and even the USB port the cable is connected to). I want to be able to sideload…<em></em></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/kobo/kobo.html" class="no-external">
-<div class="listing-date">
-Jun 12, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="UHl0aG9uJTJDUmFzcGJlcnJ5JTIwUGk=" data-listing-date-sort="1679356800000" data-listing-file-modified-sort="1740589752168" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="340">
-<div class="thumbnail">
-<p><a href="./posts/powermon/powermon.html" class="no-external"></a></p><a href="./posts/powermon/powermon.html" class="no-external">
-<p class="card-img-top"><img src="posts/powermon/api.png" alt="Example screenshot from API"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/powermon/powermon.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/powermon/powermon.html" class="no-external">Not so smart metering</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/powermon/powermon.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">
-Python
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('UmFzcGJlcnJ5JTIwUGk='); return false;">
-Raspberry Pi
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/powermon/powermon.html" class="no-external">This project has been a while in the making, and I’ve finally got round to finishing it off (well as much as anything is finished). A big part of the delay was, somewhat…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/powermon/powermon.html" class="no-external">
-<div class="listing-date">
-Mar 21, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="U2hpbnklMkNS" data-listing-date-sort="1669248000000" data-listing-file-modified-sort="1740589752168" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="882">
-<div class="thumbnail">
-<p><a href="./posts/shinysender/shinysender.html" class="no-external"></a></p><a href="./posts/shinysender/shinysender.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/shinysender/shinysender.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/shinysender/shinysender.html" class="no-external">Easily deploying Shiny apps</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/shinysender/shinysender.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('U2hpbnk='); return false;">
-Shiny
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
-R
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/shinysender/shinysender.html" class="no-external">I’m currently running a pilot Shiny web hosting service at the University of Manchester. One issue with the standalone (free) Shiny Server is that it’s not particularly easy…<code></code><del></del><del></del><sup></sup></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/shinysender/shinysender.html" class="no-external">
-<div class="listing-date">
-Nov 24, 2022
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script data-goatcounter="https://mawdsstats.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
 <script id="quarto-html-after-body" type="application/javascript">
@@ -848,6 +603,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="mawds/mawds" data-repo-id="R_kgDOIuNKpA" data-category="General" data-category-id="DIC_kwDOIuNKpM4Ci7Ei" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -866,5 +625,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
