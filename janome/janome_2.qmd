@@ -63,7 +63,7 @@ The wkerwake/PicoROM has a reset pin that can be toggled when the Pico is ready,
 Tim suggested just writing the ROM image to a flash chip, and using this directly.  One of the pages on the  [PES2Card](http://www.knitandsew.demon.nl/p2c/pes2card3.htm) page [lists the chips used in the various official aftermarket cards that used to be available](http://www.knitandsew.demon.nl/p2c/jancard.htm).   I've ordered [a chip to use](https://www.ebay.co.uk/itm/388232058408), which I plan to program using an Arduino and [this code](https://github.com/warber0x/FMPUNO). This was written to write Gameboy ROM images, and uses the same chip, so fingers crossed that will work.
 
 
-
+Update [futher progress here](janome_3.html).
 
 
 
