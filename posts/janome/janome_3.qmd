@@ -1,0 +1,7 @@
+---
+title: "Reverse engineering Janome embroidery cards (part 3)"
+date: 2026-01-02
+---
+
+My attempts to reverse engineer an old sewing machine's embroidery function
+continue.  [In (a belated) part 3 of this saga, some success, but not how I was expecting](../../janome/janome_3.html).

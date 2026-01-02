@@ -10,7 +10,23 @@
 <atom:link href="https://www.mawds.co.uk/index.xml" rel="self" type="application/rss+xml"/>
 <description>David Mawdsley&#39;s blog</description>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Wed, 28 May 2025 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 02 Jan 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Reverse engineering Janome embroidery cards (part 3)</title>
+  <link>https://www.mawds.co.uk/posts/janome/janome_3.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>My attempts to reverse engineer an old sewing machine’s embroidery function continue. <a href="../../janome/janome_3.html">In (a belated) part 3 of this saga, some success, but not how I was expecting</a>.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.mawds.co.uk/posts/janome/janome_3.html</guid>
+  <pubDate>Fri, 02 Jan 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Reverse engineering Janome embroidery cards (part 2)</title>
   <link>https://www.mawds.co.uk/posts/janome/janome_2.html</link>
